@@ -29,7 +29,7 @@ public class AccountDBContext extends DBContext {
                 Account account = new Account();
                 account.setUsername(rs.getString("username"));
                 account.setPassword(rs.getString("password"));
-                account.setDisplayName(rs.getString("displayname"));
+                account.setDisplayname(rs.getString("displayname"));
                 return account;
             }
         } catch (SQLException ex) {
