@@ -1,0 +1,115 @@
+.container{
+    width: 90%;
+    background-color: #fff;
+    margin: 40px auto;
+    border-radius: 25px;
+    overflow: hidden;
+}
+
+.container_head{
+    border-radius: 25px 25px 0 0;
+    background-color: greenyellow;
+    /* height: 100px;    */
+    text-align: center;
+    padding: 40px;
+}
+
+.container_content{
+    padding: 40px;
+}
+
+.container_content .input_field{
+    display: grid;
+    grid-template-columns: repeat(6,1fr);
+}
+
+.personal_info{
+    padding: 0 20px 10px 20px;
+}
+
+.container_content label{
+    display: inline-block;
+    font-size: 20px;
+    font-weight: 500;
+    margin-bottom: 10px;
+    cursor: pointer;
+}
+
+.container_content input, .gender select{
+    font-family: 'Roboto', sans-serif;
+    color: #000;
+    padding: 15px;
+    border-radius: 10px;
+    outline: none;
+    font-size: 16px;
+    font-weight: 500;
+    border: 1px solid #eee;
+    background-color: #eee;
+    transition: .1s linear;
+    width: 100%;
+}
+
+.container_content input:focus, .gender select:focus{
+    border-color: #eee;
+    background-color: #fff;
+}
+
+.gender{
+    padding: 0 20px 20px;
+}
+
+.name{
+    grid-column: 1 / span 2;
+}
+
+.birthday{
+    grid-column: 3 / span 2;
+}
+
+.gender{
+    grid-column: 5 / span 2;
+}
+
+.identification{
+    grid-column: 1 / span 3;
+}
+
+.phone{
+    grid-column: 4 / span 3;
+}
+
+.address{
+    grid-column: 1 / span 6;
+}
+
+.default_field{
+    font-size: 20px;
+    display: flex;
+    padding: 20px 20px 0;
+    justify-content: space-between;
+}
+
+.default_field p{
+    text-decoration: none;
+    font-weight: 400;
+}
+
+.default_field p span{
+    font-weight: bold;
+    text-decoration: underline;
+    text-transform: uppercase;
+}
+
+#send{
+    display: block;
+    color: white;
+    font-size: 20px;
+    font-weight: bold;
+    text-transform: uppercase;
+    background-color: greenyellow;
+    border: none;
+    margin: 20px auto 0;
+    padding: 15px;
+    border-radius: 7px;
+    cursor: pointer;
+}

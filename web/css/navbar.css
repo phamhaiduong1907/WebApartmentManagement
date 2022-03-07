@@ -1,0 +1,48 @@
+header{
+    background-color: #fff;
+}
+
+.navLogo{
+    font-size: 2.2rem;
+    color: black;
+}
+
+.navLogo p{
+    text-shadow: 2px 2px lightgray;
+    transform: skewX(-10deg);
+}
+
+.nav-item a{
+    font-size: 1.2rem;
+    color: #000;
+    transition: all .5s ease;
+}
+
+.nav-item .active{
+    color: #6495ed;
+}
+
+.nav-item .log_out{
+    color: #fff;
+    background-color: #6495ed;
+    border: 1px solid #6495ed;
+    transition: all .5s ease;
+}
+
+.nav-item .log_out:hover{
+    background-color: #fff;
+    color: #6495ed;
+}
+
+.user{
+    font-size: 30px;
+    margin: 0 20px;
+    width: 35px;
+    height: 35px;
+    color: #D3D9D9;
+    /* background-color: #D3D9D9;
+    border: 2px solid #D3D9D9;
+    position: relative;
+    overflow: hidden;
+    border-radius: 50%; */
+}

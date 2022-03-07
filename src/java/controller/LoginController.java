@@ -53,7 +53,7 @@ public class LoginController extends HttpServlet {
         if (account != null) {
             request.getSession().setAttribute("account", account);
 //            response.sendRedirect("wall");
-            response.getWriter().println("successfull");
+            response.sendRedirect("index");
         } else {
             request.getSession().setAttribute("account", null);
             String warning = "Something went wrong with your username or password! Please check your login information again";
