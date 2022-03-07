@@ -19,6 +19,48 @@
         <link href="css/detail.css" rel="stylesheet" type="text/css"/>
     </head>
     <body>
-        <h1>Hello World!</h1>
+        <header>
+            <nav class="headerNav navbar navbar-expand-lg container">
+                <div class="container-fluid">
+                    <a class="navLogo navbar-brand text-center" href="../index.html">
+                        <p class="fw-bold mb-0"><i class="fa fa-book"></i> QUẢN LÝ</p>
+                        <p class="fw-bold mb-0">NHÀ TRỌ</p>
+                    </a>
+
+                    <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                            data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false"
+                            aria-label="Toggle navigation">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+
+                    <div class="collapse navbar-collapse" id="navbarNavDropdown">
+                        <ul class="navbar-nav ms-auto">
+                            <li class="nav-item">
+                                <a class="nav-link" aria-current="page" href="index.html">Trang Chủ </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link active" href="detail.html">Chi Tiết </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="revenue.html">Thu Chi </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="service.html">Nhà xe</a>
+                            </li>
+                            <li class="nav-item user">
+                                <i class="fa fa-user-circle"></i>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link log_out" href="#">Thoát</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </nav>
+        </header>
+        
+        
+        <script src="js/jquery-3.6.0.min.js" type="text/javascript"></script>
+        <script src="js/bootstrap.bundle.min.js" type="text/javascript"></script>
     </body>
 </html>

@@ -57,5 +57,10 @@
                 </div>
             </nav>
         </header>
+        
+        
+        
+        <script src="js/jquery-3.6.0.min.js" type="text/javascript"></script>
+        <script src="js/bootstrap.bundle.min.js" type="text/javascript"></script>
     </body>
 </html>
