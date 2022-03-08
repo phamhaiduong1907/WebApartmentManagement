@@ -20,9 +20,8 @@ import model.Room;
  * @author Hai Duong
  */
 public class IndexController extends BaseAuthenticationController {
-
-    @Override
-    protected void processGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    
+    private void processRequest(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
         RoomDBContext dbRoom = new RoomDBContext();
         ArrayList<Room> rooms = dbRoom.getRooms();
         request.setAttribute("rooms", rooms);
@@ -42,10 +41,14 @@ public class IndexController extends BaseAuthenticationController {
         request.setAttribute("customerTotal", customerTotal);
         request.getRequestDispatcher("index.jsp").forward(request, response);
     }
+    @Override
+    protected void processGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        processRequest(request, response);
+    }
 
     @Override
     protected void processPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
+        processRequest(request, response);
     }
 
     @Override
