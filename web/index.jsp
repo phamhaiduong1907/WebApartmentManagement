@@ -5,6 +5,7 @@
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@ taglib prefix = "c" uri = "http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
     <head>
@@ -35,31 +36,54 @@
                     <div class="collapse navbar-collapse" id="navbarNavDropdown">
                         <ul class="navbar-nav ms-auto">
                             <li class="nav-item">
-                                <a class="nav-link active" aria-current="page" href="index.html">Trang chủ </a>
+                                <a class="nav-link active" aria-current="page" href="index">Trang chủ </a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="view/detail.html">Chi Tiết</a>
+                                <a class="nav-link" href="detail">Chi Tiết</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="view/revenue.html">Thu Chi</a>
+                                <a class="nav-link" href="revenue">Thu Chi</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="view/service.html">Nhà xe</a>
+                                <a class="nav-link" href="service">Nhà xe</a>
                             </li>
                             <li class="nav-item user">
                                 <i class="fa fa-user-circle"></i>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link log_out" href="#">Thoát</a>
+                                <a class="nav-link log_out" href="logout">Thoát</a>
                             </li>
                         </ul>
                     </div>
                 </div>
             </nav>
         </header>
-        
-        
-        
+        <section class="content">
+            <div class="content_header">
+                <p><i class="fa fa-align-justify"></i> THÔNG TIN CHUNG</p>
+            </div>
+            <div class="content_report">
+                <p><i class="fa fa-hotel"></i> Tổng số phòng: <span>${requestScope.rooms.size()}</span></p>
+                <p><i class="fa fa-battery-full" style="color: rgba(255, 0, 0,0.7);"></i> Phòng đang thuê: <span>${requestScope.roomInRent}</span></p>
+                <p><i class="fa fa-battery-empty" style="color: #adff2f;"></i> Phòng trống:  <span>${requestScope.roomEmpty}</span></p>
+                <p><i class="fa fa-user-alt" style="margin-right: 10px;"></i>Tổng số người thuê:  <span>${requestScope.customerTotal}</span></p>
+            </div>
+            <div class="content_main">
+                <c:if test="${requestScope.rooms.size()>0}">
+                    <c:forEach items="${requestScope.rooms}" var="r">
+                        <div class="room" style="background-color: ${r.customers.size() > 0 ?"rgba(255, 0, 0,0.7)":"#adff2f"};">
+                            <p><i class="fa fa-home"></i><br>Phòng ${r.rid}</p>
+                            <div class="room_type">${r.customers.size()}/${r.rtype} người</div>
+                        </div>
+                    </c:forEach>
+                </c:if>
+                <c:if test="${requestScope.rooms.size() eq 0}">
+                    <p style="text-align: center;">Ko có phòng nào để hiện thị</p> 
+                </c:if>
+            </div>
+        </section>
+
+
         <script src="js/jquery-3.6.0.min.js" type="text/javascript"></script>
         <script src="js/bootstrap.bundle.min.js" type="text/javascript"></script>
     </body>
