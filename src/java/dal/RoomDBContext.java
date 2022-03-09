@@ -11,6 +11,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import model.Contract;
 import model.Customer;
 import model.Room;
 
@@ -22,8 +23,11 @@ public class RoomDBContext extends DBContext {
 
     public ArrayList<Room> getRooms() {
         ArrayList<Room> rooms = new ArrayList<>();
-        String sql = " select r.rid, r.rtype, rp.price from Room r inner join Room_Price rp on r.rtype = rp.rtype ";
+        String sql = " select r.rid, r.[type], rp.price, rp.deposit \n"
+                + "from Room r inner join Room_Price rp \n"
+                + "on r.[type] = rp.[type] ";
         PreparedStatement stm;
+        PreparedStatement stm_select_contract;
         PreparedStatement stm_select_customer;
         try {
             connection.setAutoCommit(false);
@@ -32,26 +36,38 @@ public class RoomDBContext extends DBContext {
             while (rs.next()) {
                 Room room = new Room();
                 room.setRid(rs.getInt("rid"));
-                room.setRtype(rs.getInt("rtype"));
+                room.setType(rs.getInt("type"));
                 room.setPrice(rs.getInt("price"));
-                String sql_select_customer = "select cus.* from \n"
-                        + "[Contract] c inner join Customer cus\n"
-                        + "on c.cid = cus.cid where c.rid = ?";
-                stm_select_customer = connection.prepareStatement(sql_select_customer);
-                stm_select_customer.setInt(1, rs.getInt("rid"));
-                ResultSet rsCusts = stm_select_customer.executeQuery();
-                ArrayList<Customer> custs = new ArrayList<>();
-                while (rsCusts.next()) {
-                    Customer customer = new Customer();
-                    customer.setCname(rsCusts.getString("cname"));
-                    customer.setCid(rsCusts.getString("cid"));
-                    customer.setDob(rsCusts.getDate("dob"));
-                    customer.setGender(rsCusts.getBoolean("gender"));
-                    customer.setPhone(rsCusts.getString("phone"));
-                    customer.setAddress(rsCusts.getString("address"));
-                    custs.add(customer);
+                room.setDeposit(rs.getInt("deposit"));
+                String sql_select_contract = " select startdate, enddate from [Contract] where rid = ? ";
+                stm_select_contract = connection.prepareStatement(sql_select_contract);
+                stm_select_contract.setInt(1, rs.getInt("rid"));
+                ResultSet rs_Contract = stm_select_contract.executeQuery();
+                Contract contract = new Contract();
+                if (rs_Contract.next()) {
+                    contract.setRoom(room);
+                    contract.setStartdate(rs_Contract.getDate("startdate"));
+                    contract.setEnddate(rs_Contract.getDate("enddate"));
+                    ArrayList<Customer> custs = new ArrayList<>();
+                    String sql_select_cust = " select cus.* from [Contract] c inner join \n"
+                            + " Customer cus on c.rid = cus.rid where c.rid = ? ";
+                    stm_select_customer = connection.prepareStatement(sql_select_cust);
+                    stm_select_customer.setInt(1, rs.getInt("rid"));
+                    ResultSet rs_Cust = stm_select_customer.executeQuery();
+                    while(rs_Cust.next()){
+                        Customer customer = new Customer();
+                        customer.setId(rs_Cust.getString("id"));
+                        customer.setName(rs_Cust.getString("name"));
+                        customer.setDob(rs_Cust.getDate("dob"));
+                        customer.setGender(rs_Cust.getBoolean("gender"));
+                        customer.setPhone(rs_Cust.getString("phone"));
+                        customer.setAddress(rs_Cust.getString("address"));
+                        customer.setContract(contract);
+                        custs.add(customer);
+                    }
+                    contract.setCustomers(custs);
                 }
-                room.setCustomers(custs);
+                room.setContract(contract);
                 rooms.add(room);
             }
             connection.commit();
@@ -78,4 +94,5 @@ public class RoomDBContext extends DBContext {
         }
         return rooms;
     }
+
 }

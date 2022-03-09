@@ -80,6 +80,10 @@
     color: grey;    
 }
 
+.info_item{
+    width: 30%;
+}
+
 .info_item input, .info_item select, .contract_item input{
     padding: 10px;
     outline: none;

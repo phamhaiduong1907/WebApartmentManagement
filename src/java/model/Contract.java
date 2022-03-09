@@ -6,24 +6,28 @@
 package model;
 
 import java.sql.Date;
+import java.util.ArrayList;
 
 /**
  *
  * @author Hai Duong
  */
 public class Contract {
-    private Customer customer;
+    private ArrayList<Customer> customers;
     private Room room;
     private Date startdate;
     private Date enddate;
-    private int deposit;
-
-    public Customer getCustomer() {
-        return customer;
+    
+    public Contract(){
+        customers = new ArrayList<>();
     }
 
-    public void setCustomer(Customer customer) {
-        this.customer = customer;
+    public ArrayList<Customer> getCustomers() {
+        return customers;
+    }
+
+    public void setCustomers(ArrayList<Customer> customers) {
+        this.customers = customers;
     }
 
     public Room getRoom() {
@@ -48,14 +52,6 @@ public class Contract {
 
     public void setEnddate(Date enddate) {
         this.enddate = enddate;
-    }
-
-    public int getDeposit() {
-        return deposit;
-    }
-
-    public void setDeposit(int deposit) {
-        this.deposit = deposit;
     }
     
     

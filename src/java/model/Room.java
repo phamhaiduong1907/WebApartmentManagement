@@ -13,13 +13,10 @@ import java.util.ArrayList;
  */
 public class Room {
     private int rid;
-    private int rtype;
+    private int type;
     private int price;
-    private ArrayList<Customer> customers;
-    
-    public Room(){
-        customers = new ArrayList<>();
-    }
+    private int deposit;
+    private Contract contract;
 
     public int getRid() {
         return rid;
@@ -29,12 +26,12 @@ public class Room {
         this.rid = rid;
     }
 
-    public int getRtype() {
-        return rtype;
+    public int getType() {
+        return type;
     }
 
-    public void setRtype(int rtype) {
-        this.rtype = rtype;
+    public void setType(int type) {
+        this.type = type;
     }
 
     public int getPrice() {
@@ -45,13 +42,20 @@ public class Room {
         this.price = price;
     }
 
-    public ArrayList<Customer> getCustomers() {
-        return customers;
+    public int getDeposit() {
+        return deposit;
     }
 
-    public void setCustomers(ArrayList<Customer> customers) {
-        this.customers = customers;
+    public void setDeposit(int deposit) {
+        this.deposit = deposit;
     }
-    
-    
+
+    public Contract getContract() {
+        return contract;
+    }
+
+    public void setContract(Contract contract) {
+        this.contract = contract;
+    }
+
 }

@@ -12,27 +12,28 @@ import java.sql.Date;
  * @author Hai Duong
  */
 public class Customer {
-    private String cname;
-    private String cid;
+    private String name;
+    private String id;
     private Date dob;
     private boolean gender;
     private String phone;
     private String address;
+    private Contract contract;
 
-    public String getCname() {
-        return cname;
+    public String getName() {
+        return name;
     }
 
-    public void setCname(String cname) {
-        this.cname = cname;
+    public void setName(String name) {
+        this.name = name;
     }
 
-    public String getCid() {
-        return cid;
+    public String getId() {
+        return id;
     }
 
-    public void setCid(String cid) {
-        this.cid = cid;
+    public void setId(String id) {
+        this.id = id;
     }
 
     public Date getDob() {
@@ -66,6 +67,13 @@ public class Customer {
     public void setAddress(String address) {
         this.address = address;
     }
-    
+
+    public Contract getContract() {
+        return contract;
+    }
+
+    public void setContract(Contract contract) {
+        this.contract = contract;
+    }
     
 }

@@ -71,9 +71,9 @@
             <div class="content_main">
                 <c:if test="${requestScope.rooms.size()>0}">
                     <c:forEach items="${requestScope.rooms}" var="r">
-                        <div class="room" style="background-color: ${r.customers.size() > 0 ?"rgba(255, 0, 0,0.7)":"#adff2f"};">
+                        <div class="room" style="background-color: ${r.contract.customers.size() > 0 ?"rgba(255, 0, 0,0.7)":"#adff2f"};">
                             <p><i class="fa fa-home"></i><br>Phòng ${r.rid}</p>
-                            <div class="room_type">${r.customers.size()}/${r.rtype} người</div>
+                            <div class="room_type">${r.contract.customers.size()}/${r.type} người</div>
                         </div>
                     </c:forEach>
                 </c:if>
