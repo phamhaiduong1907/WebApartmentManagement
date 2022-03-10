@@ -27,8 +27,6 @@
 
 .search_form{
     padding: 10px;
-    /* display: flex;
-    justify-content: space-evenly; */
 }
 
 .search_form span{
@@ -54,8 +52,9 @@
     background-color: #fff;
 }
 
-#searchTool, #statusFilter{
-    display: none;
+#formSearch{
+    display: flex;
+    justify-content: space-around;
 }
 
 .room_add{
