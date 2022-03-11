@@ -128,13 +128,12 @@
     text-align: center;
 }
 
-.modify input{
+.modify input, .modify a{
     font-family: 'Roboto', sans-serif;
     font-weight: bold;
-    background-color: greenyellow;
+    text-decoration: none;
     color: #fff;
-    border: 1px solid greenyellow;
-    display: block;
+    display: inline-block;
     padding: 10px;
     font-size: 20px;
     border-radius: 5px;
@@ -143,8 +142,23 @@
     transition: all .1s ease;
 }
 
+.modify input{
+    background-color: greenyellow;
+    border: 1px solid greenyellow;
+}
+
+.modify a{
+    background-color: red;
+    border: 1px solid red;
+    margin-left: 10px;
+}
+
 .modify input:hover{
     background-color: #88d811;
+}
+
+.modify a:hover{
+    background-color: rgba(255,0,0,0.6); 
 }
 
 .room_member{

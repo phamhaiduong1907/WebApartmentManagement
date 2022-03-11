@@ -109,6 +109,9 @@
                             </div>
                             <div class="modify">
                                 <input type="submit" value="Chỉnh sửa">
+                                <c:if test="${requestScope.roomByID.contract.customers.size() > 0}">
+                                    <a href="#">Xoá hợp đồng</a>
+                                </c:if>
                             </div>
                         </form>
                     </div>
@@ -151,7 +154,8 @@
                         <c:if test="${requestScope.roomByID.contract.customers.size() == 0}">
                             Không có người thuê để hiển thị<br>
                         </c:if>
-                        <c:if test="${requestScope.roomByID.contract.customers.size() < requestScope.roomByID.type}">
+                        <c:if test="${requestScope.roomByID.contract.customers.size() < requestScope.roomByID.type && 
+                                      requestScope.roomByID.contract.startdate != null}">
                             <a href="" class="member_add"><i class="fa fa-plus-circle"></i> Thêm mới người thuê</a>
                         </c:if>
                     </div>

@@ -27,6 +27,8 @@
 
 .search_form{
     padding: 10px;
+    display: flex;
+    justify-content: space-around;
 }
 
 .search_form span{
@@ -50,11 +52,6 @@
 
 .search_form select:focus{
     background-color: #fff;
-}
-
-#formSearch{
-    display: flex;
-    justify-content: space-around;
 }
 
 .room_add{
@@ -133,6 +130,3 @@ table tr:first-child{
     background-color: #6495ed;
     color: #fff;
 }
-
-
-

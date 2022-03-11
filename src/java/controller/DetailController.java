@@ -33,13 +33,20 @@ public class DetailController extends BaseAuthenticationController {
     protected void processPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         RoomDBContext dbRoom = new RoomDBContext();
         ArrayList<Room> rooms = dbRoom.getRooms();
-        int rid = Integer.parseInt(request.getParameter("rid"));
+        String raw_rid = request.getParameter("rid");
+        if(raw_rid == null || raw_rid.trim().length() == 0){
+            raw_rid = "-1";
+        }
+        int rid = Integer.parseInt(raw_rid);
         String status = request.getParameter("status");
-        if(rid != -1){
+        if(status == null || status.trim().length() == 0){
+            status = "all";
+        }
+        if (rid != -1) {
             Room roomByID = dbRoom.getRoomByID(rid);
             request.setAttribute("roomByID", roomByID);
         }
-        if(!status.equals("all")){
+        if (!status.equals("all")) {
             boolean status_select = status.equalsIgnoreCase("true");
             ArrayList<Room> roomByStatus = dbRoom.getRoomByStatus(status_select);
             request.setAttribute("status", status);

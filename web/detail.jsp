@@ -74,7 +74,7 @@
                     <form action="detail" method="POST" id="formSearch">
                         <div id="searchTool">
                             <span><i class="fa fa-arrow-alt-circle-right"></i> Chọn mã phòng:</span>
-                            <select name="rid" id="rid" onchange="submitForm();">
+                            <select name="rid" id="rid" onchange="submitForm('formSearch');">
                                 <option value="-1">Tất cả</option>
                                 <c:forEach items="${requestScope.rooms}" var="r">
                                     <option value="${r.rid}" ${requestScope.roomByID.rid == r.rid ?"selected":""}>
@@ -83,9 +83,11 @@
                                 </c:forEach>
                             </select>
                         </div>
+                    </form>
+                    <form action="detail" method="POST" id="searchForm">
                         <div id="statusFilter">
                             <span><i class="fa fa-arrow-alt-circle-right"></i> Trạng thái phòng:</span>
-                            <select name="status" id="status" onchange="submitForm();">
+                            <select name="status" id="status" onchange="submitForm('searchForm');">
                                 <option value="all">Tất cả</option>
                                 <option value="true" ${requestScope.status.equals("true")?"selected":""}>Phòng đã thuê</option>
                                 <option value="false" ${requestScope.status.equals("false")?"selected":""}>Phòng trống</option>
@@ -200,9 +202,9 @@
         <script src="js/jquery-3.6.0.min.js"></script>
         <script src="js/bootstrap.bundle.min.js"></script>
         <script>
-                                function submitForm() {
-                                    document.getElementById('formSearch').submit();
-                                }
+                            function submitForm(id) {
+                                document.getElementById(id).submit();
+                            }
         </script>
     </body>
 </html>
