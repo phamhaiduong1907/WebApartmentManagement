@@ -124,7 +124,7 @@
                                 <td><%=(rooms.get(i).getContract().getCustomers().size() > 0) ? "Phòng đang thuê" : "Phòng trống"%></td>
                                 <td><%=(rooms.get(i).getContract().getCustomers().size())%></td>
                                 <td>
-                                    <a href="#" class="room_detail">Chi tiết</a>
+                                    <a href="room?rid=<%=(rooms.get(i).getRid())%>" class="room_detail">Chi tiết</a>
                                     <a href="#" class="room_delete" onclick="">Xóa</a>
                                 </td>
                             </tr>  
@@ -152,7 +152,7 @@
                                 <td>${requestScope.roomByID.contract.customers.size()>0?"Phòng đang thuê":"Phòng trống"}</td>
                                 <td>${requestScope.roomByID.contract.customers.size()}</td>
                                 <td>
-                                    <a href="#" class="room_detail">Chi tiết</a>
+                                    <a href="room?rid=${requestScope.roomByID.rid}" class="room_detail">Chi tiết</a>
                                     <a href="#" class="room_delete" onclick="">Xóa</a>
                                 </td>
                             </tr>
@@ -185,7 +185,7 @@
                                 <td><%=(roomByStatus.get(i).getContract().getCustomers().size() > 0) ? "Phòng đang thuê" : "Phòng trống"%></td>
                                 <td><%=(roomByStatus.get(i).getContract().getCustomers().size())%></td>
                                 <td>
-                                    <a href="#" class="room_detail">Chi tiết</a>
+                                    <a href="room?rid=<%=(roomByStatus.get(i).getRid())%>" class="room_detail">Chi tiết</a>
                                     <a href="#" class="room_delete" onclick="">Xóa</a>
                                 </td>
                             </tr>  
