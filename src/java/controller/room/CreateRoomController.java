@@ -33,12 +33,14 @@ public class CreateRoomController extends BaseAuthenticationController {
             throws ServletException, IOException {
         RoomDBContext db = new RoomDBContext();
         String req_rid = request.getParameter("rid");
-        if(req_rid.matches("[1-9]{1}[0-9]*")){
-            
-        }
         int type = Integer.parseInt(request.getParameter("type"));
-        
+        if (req_rid.matches("[0-9]{1,4}")) {
+            int rid = Integer.parseInt(req_rid);
+            db.insertRoom(rid, type);
+        }
+        response.sendRedirect("../detail");
     }
+
     /**
      * Returns a short description of the servlet.
      *

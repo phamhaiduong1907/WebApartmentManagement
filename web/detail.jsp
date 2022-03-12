@@ -96,10 +96,10 @@
                     </form>
                 </div>
                 <div class="room_add">
-                    <a href="#"><i class="fa fa-plus-circle"></i> Thêm phòng trọ</a>
-                    <div class="add_area">
+                    <a href="#" onclick="showForm();"><i class="fa fa-plus-circle"></i> Thêm phòng trọ</a>
+                    <div id="addArea" style="display: none;">
                         <div class="add_heading"></div>
-                        <form action="" id="formAdd" onsubmit="return checkSubmit()">
+                        <form action="room/create" method="POST" id="formAdd" onsubmit="return checkSubmit()">
                             <div class="add_content">
                                 <div class="add_input add_warning">
                                     <label for="rid">Mã phòng: </label>
@@ -283,7 +283,7 @@
                                         var validated = true;
 
                                         function check() {
-                                            var roomId = document.getElementById('roomId').value;
+                                            var roomId = document.getElementById('roomId').value.trim();
                                             var table = document.getElementById('myTable');
                                             var warning = document.getElementById('warning');
                                             const regex = "^([0-9]{1,4})$";
@@ -316,7 +316,7 @@
                                         }
 
                                         function checkSubmit() {
-                                            let roomId = document.getElementById('roomId').value;
+                                            let roomId = document.getElementById('roomId').value.trim();
                                             let type = document.getElementById('typeSelect').value;
                                             if (!validated || roomId === "") {
                                                 alert('Kiểm tra thông tin trước khi xác nhận');
