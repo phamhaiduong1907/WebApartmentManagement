@@ -40,6 +40,10 @@
         <servlet-name>ServiceController</servlet-name>
         <servlet-class>controller.ServiceController</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>DeleteRoomController</servlet-name>
+        <servlet-class>controller.room.DeleteRoomController</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>LoginController</servlet-name>
         <url-pattern>/login</url-pattern>
@@ -79,6 +83,10 @@
     <servlet-mapping>
         <servlet-name>ServiceController</servlet-name>
         <url-pattern>/service</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>DeleteRoomController</servlet-name>
+        <url-pattern>/room/delete</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

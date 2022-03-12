@@ -177,7 +177,7 @@
                                 <td><%=(rooms.get(i).getContract().getCustomers().size())%></td>
                                 <td>
                                     <a href="room?rid=<%=(rooms.get(i).getRid())%>" class="room_detail">Chi tiết</a>
-                                    <a href="#" class="room_delete" onclick="">Xóa</a>
+                                    <a href="#" class="room_delete" onclick="deleteRoom(<%=(rooms.get(i).getRid())%>);">Xóa</a>
                                 </td>
                             </tr>  
                             <%}%>
@@ -252,6 +252,13 @@
         <script src="js/jquery-3.6.0.min.js"></script>
         <script src="js/bootstrap.bundle.min.js"></script>
         <script>
+                                        function deleteRoom(id) {
+                                            var result = confirm('Xoá phòng ' + id + '\nXóa phòng sẽ xóa tất ' +
+                                                    'cả những thông tin về hợp đồng và khách hàng\nChắc chắn xóa?');
+                                            if (result) {
+                                                window.location.href = "room/delete?rid=" + id;
+                                            }
+                                        }
                                         function submitForm(id) {
                                             document.getElementById(id).submit();
                                         }
@@ -280,6 +287,10 @@
                                             }
                                         }
 
+                                        var rids = [];
+                                        <c:forEach items="${requestScope.rooms}" var="r">
+                                            rids.push(${r.rid});
+                                        </c:forEach>
                                         var validated = true;
 
                                         function check() {
@@ -291,13 +302,19 @@
                                             if (result) {
                                                 var duplicate = false;
                                                 var idParsed = parseInt(roomId, 10);
-                                                for (var i = 0, row; row = table.rows[i]; i++) {
-                                                    var col = parseInt(row.cells[1].innerHTML, 10);
-                                                    if (idParsed === col) {
+                                                for (let i = 0; i < rids.length; i++) {
+                                                    if (idParsed === rids[i]) {
                                                         duplicate = true;
                                                         break;
                                                     }
                                                 }
+//                                                for (var i = 0, row; row = table.rows[i]; i++) {
+//                                                    var col = parseInt(row.cells[1].innerHTML, 10);
+//                                                    if (idParsed === col) {
+//                                                        duplicate = true;
+//                                                        break;
+//                                                    }
+//                                                }
                                                 if (duplicate) {
                                                     warning.innerHTML = "Mã phòng đã tồn tại";
                                                     validated = false;
