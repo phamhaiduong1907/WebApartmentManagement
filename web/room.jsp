@@ -73,7 +73,7 @@
                         <i class="fa fa-caret-down" id="clickButton"></i>
                     </div>
                     <div class="info_content" id="infoContent" style="display: none;">
-                        <form action="#" method="GET" onsubmit="return check();">
+                        <form action="contract/modify" method="${requestScope.roomByID.contract.startdate == null?"GET":"POST"}" onsubmit="return check();">
                             <div class="info_input">
                                 <div class="info_item">
                                     <p>Mã phòng</p>
@@ -109,9 +109,12 @@
                                 </div>
                             </div>
                             <div class="modify">
-                                <input type="submit" value="Chỉnh sửa HĐ">
-                                <c:if test="${requestScope.roomByID.contract.customers.size() > 0}">
-                                    <a href="#">Xoá hợp đồng</a>
+                                <c:if test="${requestScope.roomByID.contract.startdate == null}">
+                                    <input type="submit" value="Tạo hợp đồng">
+                                </c:if>
+                                <c:if test="${requestScope.roomByID.contract.startdate != null}">
+                                    <input type="submit" value="Chỉnh sửa HĐ">
+                                    <a href="#" onclick="deleteContract();">Xoá hợp đồng</a>
                                 </c:if>
                             </div>
                         </form>
@@ -205,6 +208,12 @@
                                                 return false;
                                         }
                                     }
+                                }
+                            }
+                            function deleteContract(){
+                                var result = confirm('Xóa hợp đồng sẽ làm mất thông tin về khách thuê phòng\nXác nhận xóa?');
+                                if(result){
+                                    window.location.href = "contract/delete?rid=${requestScope.roomByID.rid}";
                                 }
                             }
         </script>

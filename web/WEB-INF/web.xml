@@ -44,6 +44,14 @@
         <servlet-name>DeleteRoomController</servlet-name>
         <servlet-class>controller.room.DeleteRoomController</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>ContractModifyController</servlet-name>
+        <servlet-class>controller.contract.ContractModifyController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>DeleteContractController</servlet-name>
+        <servlet-class>controller.contract.DeleteContractController</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>LoginController</servlet-name>
         <url-pattern>/login</url-pattern>
@@ -87,6 +95,14 @@
     <servlet-mapping>
         <servlet-name>DeleteRoomController</servlet-name>
         <url-pattern>/room/delete</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ContractModifyController</servlet-name>
+        <url-pattern>/contract/modify</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>DeleteContractController</servlet-name>
+        <url-pattern>/contract/delete</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

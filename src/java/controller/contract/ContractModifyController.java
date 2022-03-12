@@ -3,42 +3,24 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package controller;
+package controller.contract;
 
+import controller.BaseAuthenticationController;
+import dal.ContractDBContext;
 import dal.RoomDBContext;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.ArrayList;
+import java.sql.Date;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import model.Customer;
-import model.Room;
 
 /**
  *
  * @author Hai Duong
  */
-public class RoomController extends BaseAuthenticationController {
-
-    /**
-     * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
-     * methods.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
-    private void processRequest(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-        int rid = Integer.parseInt(request.getParameter("rid"));
-        RoomDBContext dbRoom = new RoomDBContext();
-        Room roomByID = dbRoom.getRoomByID(rid);
-        request.setAttribute("roomByID", roomByID);
-        request.getRequestDispatcher("room.jsp").forward(request, response);
-    }
+public class ContractModifyController extends BaseAuthenticationController {
     /**
      * Returns a short description of the servlet.
      *
@@ -51,12 +33,24 @@ public class RoomController extends BaseAuthenticationController {
 
     @Override
     protected void processGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        processRequest(request, response);
+        //create
+        int rid = Integer.parseInt(request.getParameter("rid"));
+        ContractDBContext db = new ContractDBContext();
+        Date startdate = Date.valueOf(request.getParameter("startdate"));
+        Date enddate = Date.valueOf(request.getParameter("enddate"));
+        db.insertContract(rid, startdate, enddate);
+        response.sendRedirect("../room?rid="+rid);
     }
 
     @Override
     protected void processPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        processRequest(request, response);
+        //update
+        int rid = Integer.parseInt(request.getParameter("rid"));
+        ContractDBContext db = new ContractDBContext();
+        Date startdate = Date.valueOf(request.getParameter("startdate"));
+        Date enddate = Date.valueOf(request.getParameter("enddate"));
+        db.updateContract(rid, startdate, enddate);
+        response.sendRedirect("../room?rid="+rid);
     }
 
 }

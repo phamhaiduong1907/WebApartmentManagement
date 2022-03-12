@@ -3,24 +3,22 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package controller;
+package controller.contract;
 
-import dal.RoomDBContext;
+import controller.BaseAuthenticationController;
+import dal.ContractDBContext;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.ArrayList;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import model.Customer;
-import model.Room;
 
 /**
  *
  * @author Hai Duong
  */
-public class RoomController extends BaseAuthenticationController {
+public class DeleteContractController extends BaseAuthenticationController {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -34,11 +32,11 @@ public class RoomController extends BaseAuthenticationController {
     private void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         int rid = Integer.parseInt(request.getParameter("rid"));
-        RoomDBContext dbRoom = new RoomDBContext();
-        Room roomByID = dbRoom.getRoomByID(rid);
-        request.setAttribute("roomByID", roomByID);
-        request.getRequestDispatcher("room.jsp").forward(request, response);
+        ContractDBContext db = new ContractDBContext();
+        db.deleteContract(rid);
+        response.sendRedirect("../room?rid="+rid);
     }
+
     /**
      * Returns a short description of the servlet.
      *
