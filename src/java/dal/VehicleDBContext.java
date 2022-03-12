@@ -28,7 +28,7 @@ public class VehicleDBContext extends DBContext{
     }
     
     //delete vehicle
-    public void deleteVehicle(){
+    public void deleteVehicle(String id){
         
     }
 }

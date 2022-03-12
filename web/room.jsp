@@ -73,19 +73,20 @@
                         <i class="fa fa-caret-down" id="clickButton"></i>
                     </div>
                     <div class="info_content" id="infoContent" style="display: none;">
-                        <form>
+                        <form action="#" method="GET" onsubmit="return check();">
                             <div class="info_input">
                                 <div class="info_item">
                                     <p>Mã phòng</p>
-                                    <input type="text" name="" value="${requestScope.roomByID.rid}">
+                                    <input type="hidden" name="rid" value="${requestScope.roomByID.rid}"/>
+                                    <input type="text" value="${requestScope.roomByID.rid}" readonly/>
                                 </div>
                                 <div class="info_item">
                                     <p>Loại phòng</p>
-                                    <input type="text" name="" value="${requestScope.roomByID.type}">
+                                    <input type="text" value="${requestScope.roomByID.type}" readonly/>
                                 </div>
                                 <div class="info_item">
                                     <p>Giá phòng/tháng</p>
-                                    <input type="text" name="" value="${requestScope.roomByID.price}">
+                                    <input type="text" id="price" value="${requestScope.roomByID.price}" readonly>
                                 </div>
                             </div>
                             <div class="contract_input">
@@ -95,20 +96,20 @@
                                 <div class="contract_detail">
                                     <div class="contract_item">
                                         <p>Ngày bắt đầu</p>
-                                        <input type="date" name="" id="" value="${requestScope.roomByID.contract.startdate}">
+                                        <input type="date" id="startdate" name="startdate" value="${requestScope.roomByID.contract.startdate}">
                                     </div>
                                     <div class="contract_item">
                                         <p>Ngày kết thúc</p>
-                                        <input type="date" name="" id="" value="${requestScope.roomByID.contract.enddate}">
+                                        <input type="date" id="enddate" name="enddate" value="${requestScope.roomByID.contract.enddate}">
                                     </div>
                                     <div class="contract_item">
                                         <p>Tiền cọc</p>
-                                        <input type="text" name="" id="" value="${requestScope.roomByID.deposit}">
+                                        <input type="text" id="deposit" value="${requestScope.roomByID.deposit}" readonly>
                                     </div>
                                 </div>
                             </div>
                             <div class="modify">
-                                <input type="submit" value="Chỉnh sửa">
+                                <input type="submit" value="Chỉnh sửa HĐ">
                                 <c:if test="${requestScope.roomByID.contract.customers.size() > 0}">
                                     <a href="#">Xoá hợp đồng</a>
                                 </c:if>
@@ -156,7 +157,7 @@
                         </c:if>
                         <c:if test="${requestScope.roomByID.contract.customers.size() < requestScope.roomByID.type && 
                                       requestScope.roomByID.contract.startdate != null}">
-                            <a href="" class="member_add"><i class="fa fa-plus-circle"></i> Thêm mới người thuê</a>
+                              <a href="" class="member_add"><i class="fa fa-plus-circle"></i> Thêm mới người thuê</a>
                         </c:if>
                     </div>
                 </div>
@@ -167,15 +168,45 @@
         <script src="js/jquery-3.6.0.min.js"></script>
         <script src="js/bootstrap.bundle.min.js"></script>
         <script>
-            var info = document.getElementById('infoContent');
-            var click = document.getElementById('clickButton');
-            click.addEventListener("click", function () {
-                if (info.style.display === 'none') {
-                    info.style.display = "block";
-                } else {
-                    info.style.display = "none";
-                }
-            })
+                            var info = document.getElementById('infoContent');
+                            var click = document.getElementById('clickButton');
+                            click.addEventListener("click", function () {
+                                if (info.style.display === 'none') {
+                                    info.style.display = "block";
+                                } else {
+                                    info.style.display = "none";
+                                }
+                            })
+                            function check() {
+                                var startdate = document.getElementById('startdate').value;
+                                var enddate = document.getElementById('enddate').value;
+                                if (startdate === "" || enddate === "") {
+                                    alert('Kiểm tra thông tin trước khi chỉnh sửa!');
+                                    return false;
+                                } else {
+                                    let start = new Date(startdate);
+                                    let end = new Date(enddate);
+                                    let current = new Date();
+                                    if (start >= end || end <= current) {
+                                        alert('Kiểm tra lại thời hạn hợp đồng');
+                                        return false;
+                                    } else {
+                                        let daysnum = (end.getTime() - start.getTime()) / (1000 * 3600 * 24);
+                                        if (daysnum < 90) {
+                                            alert('Thời hạn hợp đồng tối thiểu 3 tháng(90 ngày)');
+                                            return false;
+                                        } else {
+                                            var result = confirm('Tạo hợp đồng ' + start.getDate() + '/' + (start.getMonth() + 1) + '/' +
+                                                    (start.getYear() + 1900) + ' - ' + end.getDate() + '/' + (end.getMonth() + 1) + '/' +
+                                                    (end.getYear() + 1900) + '?');
+                                            if (result)
+                                                return true;
+                                            else
+                                                return false;
+                                        }
+                                    }
+                                }
+                            }
         </script>
     </body>
 </html>

@@ -103,7 +103,7 @@
     font-weight: bold;
 }
 
-.info_item input:focus, .contract_item input:focus{
+.info_item input:focus, .contract_item input:focus, .info_item select:focus, .contract_item select:focus{
     box-shadow: 0 0 2px 2px lightskyblue inset;
 }
 
