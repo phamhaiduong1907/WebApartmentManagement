@@ -35,22 +35,22 @@
                     <div class="collapse navbar-collapse" id="navbarNavDropdown">
                         <ul class="navbar-nav ms-auto">
                             <li class="nav-item">
-                                <a class="nav-link" aria-current="page" href="index.html">Trang chủ </a>
+                                <a class="nav-link" aria-current="page" href="index">Trang chủ </a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="detail.html">Chi Tiết</a>
+                                <a class="nav-link" href="detail">Chi Tiết</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="revenue.html">Thu Chi</a>
+                                <a class="nav-link" href="revenue">Thu Chi</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link active" href="service.html">Nhà xe</a>
+                                <a class="nav-link active" href="service">Nhà xe</a>
                             </li>
                             <li class="nav-item user">
                                 <i class="fa fa-user-circle"></i>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link log_out" href="#">Thoát</a>
+                                <a class="nav-link log_out" href="logout">Thoát</a>
                             </li>
                         </ul>
                     </div>
