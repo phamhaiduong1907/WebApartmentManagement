@@ -161,11 +161,11 @@ public class RoomDBContext extends DBContext {
         if(status){
             sql = " select r.rid, r.[type], rp.price, rp.deposit from Room r \n"
                 + "inner join Room_Price rp on r.[type] = rp.[type] where\n"
-                + "r.rid in (select rid from [Contract]) ";
+                + "r.rid in (select rid from [Contract]) order by r.[type] ";
         } else {
             sql = " select r.rid, r.[type], rp.price, rp.deposit from Room r \n"
                 + "inner join Room_Price rp on r.[type] = rp.[type] where\n"
-                + "r.rid not in (select rid from [Contract]) ";
+                + "r.rid not in (select rid from [Contract]) order by r.[type] ";
         }
         PreparedStatement stm;
         PreparedStatement stm_select_contract;
@@ -230,8 +230,32 @@ public class RoomDBContext extends DBContext {
     }
 
     // add room
-    public void insertRoom() {
-
+    public void insertRoom(int rid, int type) {
+        String sql = " insert into Room values (?,?) ";
+        PreparedStatement stm = null;
+        try {
+            stm = connection.prepareStatement(sql);
+            stm.setInt(1, rid);
+            stm.setInt(2, type);
+            stm.executeUpdate();
+        } catch (SQLException ex) {
+            Logger.getLogger(RoomDBContext.class.getName()).log(Level.SEVERE, null, ex);
+        } finally {
+            if(stm != null){
+                try {
+                    stm.close();
+                } catch (SQLException ex) {
+                    Logger.getLogger(RoomDBContext.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+            if(connection != null){
+                try {
+                    connection.close();
+                } catch (SQLException ex) {
+                    Logger.getLogger(RoomDBContext.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+        }
     }
 
     //delete room

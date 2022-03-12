@@ -72,7 +72,7 @@
             <div class="main_content">
                 <div class="search_form">
                     <form action="detail" method="POST" id="formSearch">
-                        <div id="searchTool">
+                        <div>
                             <span><i class="fa fa-arrow-alt-circle-right"></i> Chọn mã phòng:</span>
                             <select name="rid" id="rid" onchange="submitForm('formSearch');">
                                 <option value="-1">Tất cả</option>
@@ -85,7 +85,7 @@
                         </div>
                     </form>
                     <form action="detail" method="POST" id="searchForm">
-                        <div id="statusFilter">
+                        <div>
                             <span><i class="fa fa-arrow-alt-circle-right"></i> Trạng thái phòng:</span>
                             <select name="status" id="status" onchange="submitForm('searchForm');">
                                 <option value="all">Tất cả</option>
@@ -97,10 +97,60 @@
                 </div>
                 <div class="room_add">
                     <a href="#"><i class="fa fa-plus-circle"></i> Thêm phòng trọ</a>
+                    <div class="add_area">
+                        <div class="add_heading"></div>
+                        <form action="" id="formAdd" onsubmit="return checkSubmit()">
+                            <div class="add_content">
+                                <div class="add_input add_warning">
+                                    <label for="rid">Mã phòng: </label>
+                                    <input type="text" name="rid" id="roomId" placeholder="Nhập số phòng VD: 101, 102, ..."
+                                           onkeyup="check();">
+                                    <p id="warning"></p>
+                                </div>
+                                <div class="add_input">
+                                    <label for="type">Loại phòng: </label>
+                                    <select name="type" id="typeSelect" onchange="show();">
+                                        <option value="0">Chọn loại phòng</option>
+                                        <option value="2">Phòng 2</option>
+                                        <option value="3">Phòng 3</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div id="hiddenArea2" style="display: none;">
+                                <div class="default_content">
+                                    <div class="add_input">
+                                        <label for="price">Tiền phòng/tháng: </label>
+                                        <input type="text" name="price" id=""
+                                               value="1800000" disabled>
+                                    </div>
+                                    <div class="add_input">
+                                        <label for="deposit">Tiền cọc: </label>
+                                        <input type="text" name="deposit" id="" value="1800000" disabled>
+                                    </div>
+                                </div>
+                                <input type="submit" value="Thêm" class="addSubmit">
+                            </div>
+                            <div id="hiddenArea3" style="display: none;">
+                                <div class="default_content">
+                                    <div class="add_input">
+                                        <label for="price">Tiền phòng/tháng: </label>
+                                        <input type="text" name="price" id="" 
+                                               value="2500000" disabled>
+                                    </div>
+                                    <div class="add_input">
+                                        <label for="deposit">Tiền cọc: </label>
+                                        <input type="text" name="deposit" id=""
+                                               value="2500000" disabled>
+                                    </div>
+                                </div>
+                                <input type="submit" value="Thêm" class="addSubmit">
+                            </div>
+                        </form>
+                    </div>
                 </div>
                 <div class="content_detail">
                     <c:if test="${(requestScope.rooms.size() > 0 || requestScope.rooms != null) && requestScope.roomByID == null && requestScope.roomByStatus == null}">
-                        <table>
+                        <table id="myTable">
                             <tr>
                                 <td>STT</td>
                                 <td>Mã phòng</td>
@@ -134,7 +184,7 @@
                         </table>
                     </c:if>
                     <c:if test="${requestScope.roomByID != null}">
-                        <table>
+                        <table id="myTable">
                             <tr>
                                 <td>STT</td>
                                 <td>Mã phòng</td>
@@ -149,8 +199,8 @@
                                 <td>1</td>
                                 <td>${requestScope.roomByID.rid}</td>
                                 <td>${requestScope.roomByID.type}</td>
-                                <td>${requestScope.roomByID.contract.startdate}</td>
-                                <td>${requestScope.roomByID.contract.enddate}</td>
+                                <td>${requestScope.roomByID.contract.startdate == null ? "-" : requestScope.roomByID.contract.startdate}</td>
+                                <td>${requestScope.roomByID.contract.enddate == null ? "-" : requestScope.roomByID.contract.enddate}</td>
                                 <td>${requestScope.roomByID.contract.customers.size()>0?"Phòng đang thuê":"Phòng trống"}</td>
                                 <td>${requestScope.roomByID.contract.customers.size()}</td>
                                 <td>
@@ -161,7 +211,7 @@
                         </table>
                     </c:if>
                     <c:if test="${requestScope.roomByStatus != null}">
-                        <table>
+                        <table id="myTable">
                             <tr>
                                 <td>STT</td>
                                 <td>Mã phòng</td>
@@ -202,9 +252,84 @@
         <script src="js/jquery-3.6.0.min.js"></script>
         <script src="js/bootstrap.bundle.min.js"></script>
         <script>
-                            function submitForm(id) {
-                                document.getElementById(id).submit();
-                            }
+                                        function submitForm(id) {
+                                            document.getElementById(id).submit();
+                                        }
+
+                                        function show() {
+                                            var hidden2 = document.getElementById('hiddenArea2');
+                                            var hidden3 = document.getElementById('hiddenArea3')
+                                            var typeSelect = document.getElementById('typeSelect');
+                                            if (typeSelect.value == '0') {
+                                                hidden2.style.display = "none";
+                                                hidden3.style.display = "none";
+                                            } else if (typeSelect.value == '2') {
+                                                hidden2.style.display = "block";
+                                                hidden3.style.display = "none";
+                                            } else {
+                                                hidden2.style.display = "none";
+                                                hidden3.style.display = "block";
+                                            }
+                                        }
+                                        function showForm() {
+                                            var addArea = document.getElementById('addArea');
+                                            if (addArea.style.display === "none") {
+                                                addArea.style.display = "block";
+                                            } else {
+                                                addArea.style.display = "none";
+                                            }
+                                        }
+
+                                        var validated = true;
+
+                                        function check() {
+                                            var roomId = document.getElementById('roomId').value;
+                                            var table = document.getElementById('myTable');
+                                            var warning = document.getElementById('warning');
+                                            const regex = "^([0-9]{1,4})$";
+                                            var result = new RegExp(regex, 'g').test(roomId);
+                                            if (result) {
+                                                var duplicate = false;
+                                                var idParsed = parseInt(roomId, 10);
+                                                for (var i = 0, row; row = table.rows[i]; i++) {
+                                                    var col = parseInt(row.cells[1].innerHTML, 10);
+                                                    if (idParsed === col) {
+                                                        duplicate = true;
+                                                        break;
+                                                    }
+                                                }
+                                                if (duplicate) {
+                                                    warning.innerHTML = "Mã phòng đã tồn tại";
+                                                    validated = false;
+                                                } else {
+                                                    warning.innerHTML = "";
+                                                    validated = true;
+                                                }
+                                            } else {
+                                                warning.innerHTML = "Mã phòng không hợp lệ ( Chỉ bao gồm tối đa 4 số )";
+                                                validated = false;
+                                            }
+
+                                            if (roomId.length == 0 || roomId === null) {
+                                                warning.innerHTML = "";
+                                            }
+                                        }
+
+                                        function checkSubmit() {
+                                            let roomId = document.getElementById('roomId').value;
+                                            let type = document.getElementById('typeSelect').value;
+                                            if (!validated || roomId === "") {
+                                                alert('Kiểm tra thông tin trước khi xác nhận');
+                                                return false;
+                                            } else {
+                                                let result = confirm('Tạo phòng mã: ' + roomId + ',\nLoại phòng: ' + type +
+                                                        '\nXác nhận tạo phòng');
+                                                if (result)
+                                                    return true;
+                                                else
+                                                    return false;
+                                            }
+                                        }
         </script>
     </body>
 </html>

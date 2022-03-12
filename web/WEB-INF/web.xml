@@ -16,6 +16,22 @@
         <servlet-name>RoomController</servlet-name>
         <servlet-class>controller.RoomController</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>InsertCustomerController</servlet-name>
+        <servlet-class>controller.customer.InsertCustomerController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>DeleteCustomerController</servlet-name>
+        <servlet-class>controller.customer.DeleteCustomerController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>UpdateCustomerController</servlet-name>
+        <servlet-class>controller.customer.UpdateCustomerController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>CreateRoomController</servlet-name>
+        <servlet-class>controller.room.CreateRoomController</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>LoginController</servlet-name>
         <url-pattern>/login</url-pattern>
@@ -31,6 +47,22 @@
     <servlet-mapping>
         <servlet-name>RoomController</servlet-name>
         <url-pattern>/room</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>InsertCustomerController</servlet-name>
+        <url-pattern>/customer/insert</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>DeleteCustomerController</servlet-name>
+        <url-pattern>/customer/delete</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>UpdateCustomerController</servlet-name>
+        <url-pattern>/customer/update</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>CreateRoomController</servlet-name>
+        <url-pattern>/room/create</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
