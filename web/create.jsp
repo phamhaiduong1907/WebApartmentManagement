@@ -13,8 +13,8 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Tạo mới hợp đồng</title>
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" />
-        <link href="css/global.css" rel="stylesheet" type="text/css"/>
-        <link href="css/create.css" rel="stylesheet" type="text/css"/>
+        <link href="../css/global.css" rel="stylesheet" type="text/css"/>
+        <link href="../css/create.css" rel="stylesheet" type="text/css"/>
     </head>
     <body>
         <div class="container">
@@ -22,7 +22,7 @@
                 <h1><i class="fa fa-pen-alt"></i> ĐIỀN THÔNG TIN TƯƠNG ỨNG VÀO BIỂU MẪU</h1>
             </div>
             <div class="container_content">
-                <form action="" method="">
+                <form action="insert" method="POST">
                     <div class="input_field">
                         <div class="personal_info name">
                             <label for="name">Họ và tên: </label>
@@ -41,7 +41,7 @@
                         </div>
                         <div class="personal_info identification">
                             <label for="identification">Số chứng minh thư ( CCCD nếu có <span style="color: red;">*</span> ): </label>
-                            <input type="text" name="cid" id="identification" placeholder="VD: 034202000167">
+                            <input type="text" name="id" id="identification" placeholder="VD: 034202000167">
                         </div>
                         <div class="personal_info phone">
                             <label for="phone">Số điện thoại: </label>
@@ -55,12 +55,10 @@
                     </div>
                     <p style="text-transform: uppercase; padding: 20px 20px 0; font-weight: bold; font-size: 25px;"><i class="fa fa-info-circle"></i> Thông tin phòng thuê: </p>
                     <div class="default_field">
-                        <input type="hidden" name="">
-                        <p><span>Mã phòng</span>: 102</p>
-                        <input type="hidden" name="">
-                        <p><span>Loại phòng</span>: phòng 2 người</p>
-                        <input type="hidden" name="">
-                        <p><span>Tiền phòng/tháng</span>: 1.800.000 VNĐ</p>
+                        <input type="hidden" name="rid" value="${requestScope.roomByID.rid}">
+                        <p><span>Mã phòng</span>: ${requestScope.roomByID.rid}</p>
+                        <p><span>Loại phòng</span>: phòng ${requestScope.roomByID.type} người</p>
+                        <p><span>Tiền phòng/tháng</span>: ${requestScope.roomByID.price} VNĐ</p>
                     </div> 
                     <button type="submit" id="send">xác nhận</button>
                 </form>

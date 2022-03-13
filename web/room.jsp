@@ -160,7 +160,7 @@
                         </c:if>
                         <c:if test="${requestScope.roomByID.contract.customers.size() < requestScope.roomByID.type && 
                                       requestScope.roomByID.contract.startdate != null}">
-                              <a href="" class="member_add"><i class="fa fa-plus-circle"></i> Thêm mới người thuê</a>
+                              <a href="customer/insert?rid=${requestScope.roomByID.rid}" class="member_add"><i class="fa fa-plus-circle"></i> Thêm mới người thuê</a>
                         </c:if>
                     </div>
                 </div>

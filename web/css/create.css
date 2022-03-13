@@ -113,3 +113,7 @@
     border-radius: 7px;
     cursor: pointer;
 }
+
+#send:hover{
+    background-color: #88d811;
+}
