@@ -148,8 +148,8 @@
                                         <td>${c.address}</td>
                                         <td>${c.phone}</td>
                                         <td>
-                                            <a href="#">Chỉnh sửa</a>
-                                            <a href="#" class="member_delete">Xóa</a>
+                                            <a href="customer/update?id=${c.id}&rid=${requestScope.roomByID.rid}">Chỉnh sửa</a>
+                                            <a href="#" class="member_delete" onclick="deleteCust('${c.name}','${c.id}','${requestScope.roomByID.rid}');">Xóa</a>
                                         </td>
                                     </tr>
                                 </c:forEach>
@@ -171,51 +171,57 @@
         <script src="js/jquery-3.6.0.min.js"></script>
         <script src="js/bootstrap.bundle.min.js"></script>
         <script>
-                            var info = document.getElementById('infoContent');
-                            var click = document.getElementById('clickButton');
-                            click.addEventListener("click", function () {
-                                if (info.style.display === 'none') {
-                                    info.style.display = "block";
-                                } else {
-                                    info.style.display = "none";
-                                }
-                            })
-                            function check() {
-                                var startdate = document.getElementById('startdate').value;
-                                var enddate = document.getElementById('enddate').value;
-                                if (startdate === "" || enddate === "") {
-                                    alert('Kiểm tra thông tin trước khi chỉnh sửa!');
-                                    return false;
-                                } else {
-                                    let start = new Date(startdate);
-                                    let end = new Date(enddate);
-                                    let current = new Date();
-                                    if (start >= end || end <= current) {
-                                        alert('Kiểm tra lại thời hạn hợp đồng');
-                                        return false;
-                                    } else {
-                                        let daysnum = (end.getTime() - start.getTime()) / (1000 * 3600 * 24);
-                                        if (daysnum < 90) {
-                                            alert('Thời hạn hợp đồng tối thiểu 3 tháng(90 ngày)');
-                                            return false;
-                                        } else {
-                                            var result = confirm('Tạo hợp đồng ' + start.getDate() + '/' + (start.getMonth() + 1) + '/' +
-                                                    (start.getYear() + 1900) + ' - ' + end.getDate() + '/' + (end.getMonth() + 1) + '/' +
-                                                    (end.getYear() + 1900) + '?');
-                                            if (result)
-                                                return true;
-                                            else
-                                                return false;
-                                        }
-                                    }
-                                }
-                            }
-                            function deleteContract(){
-                                var result = confirm('Xóa hợp đồng sẽ làm mất thông tin về khách thuê phòng\nXác nhận xóa?');
-                                if(result){
-                                    window.location.href = "contract/delete?rid=${requestScope.roomByID.rid}";
-                                }
-                            }
+                                                var info = document.getElementById('infoContent');
+                                                var click = document.getElementById('clickButton');
+                                                click.addEventListener("click", function () {
+                                                    if (info.style.display === 'none') {
+                                                        info.style.display = "block";
+                                                    } else {
+                                                        info.style.display = "none";
+                                                    }
+                                                })
+                                                function check() {
+                                                    var startdate = document.getElementById('startdate').value;
+                                                    var enddate = document.getElementById('enddate').value;
+                                                    if (startdate === "" || enddate === "") {
+                                                        alert('Kiểm tra thông tin trước khi chỉnh sửa!');
+                                                        return false;
+                                                    } else {
+                                                        let start = new Date(startdate);
+                                                        let end = new Date(enddate);
+                                                        let current = new Date();
+                                                        if (start >= end || end <= current) {
+                                                            alert('Kiểm tra lại thời hạn hợp đồng');
+                                                            return false;
+                                                        } else {
+                                                            let daysnum = (end.getTime() - start.getTime()) / (1000 * 3600 * 24);
+                                                            if (daysnum < 90) {
+                                                                alert('Thời hạn hợp đồng tối thiểu 3 tháng(90 ngày)');
+                                                                return false;
+                                                            } else {
+                                                                var result = confirm('Tạo hợp đồng ' + start.getDate() + '/' + (start.getMonth() + 1) + '/' +
+                                                                        (start.getYear() + 1900) + ' - ' + end.getDate() + '/' + (end.getMonth() + 1) + '/' +
+                                                                        (end.getYear() + 1900) + '?');
+                                                                if (result)
+                                                                    return true;
+                                                                else
+                                                                    return false;
+                                                            }
+                                                        }
+                                                    }
+                                                }
+                                                function deleteContract() {
+                                                    var result = confirm('Xóa hợp đồng sẽ làm mất thông tin về khách thuê phòng\nXác nhận xóa?');
+                                                    if (result) {
+                                                        window.location.href = "contract/delete?rid=${requestScope.roomByID.rid}";
+                                                    }
+                                                }
+                                                function deleteCust(name,id,rid) {
+                                                    var result = confirm('Xác nhận xóa '+name);
+                                                    if(result){
+                                                        window.location.href = "customer/delete?id="+id+"&rid="+rid;
+                                                    }
+                                                }
         </script>
     </body>
 </html>
