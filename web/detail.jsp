@@ -177,7 +177,7 @@
                                 <td><%=(rooms.get(i).getContract().getCustomers().size())%></td>
                                 <td>
                                     <a href="room?rid=<%=(rooms.get(i).getRid())%>" class="room_detail">Chi tiết</a>
-                                    <a href="#" class="room_delete" onclick="deleteRoom(<%=(rooms.get(i).getRid())%>);">Xóa</a>
+                                    <a href="#" class="room_delete" onclick="return deleteRoom(<%=(rooms.get(i).getRid())%>);">Xóa</a>
                                 </td>
                             </tr>  
                             <%}%>
@@ -205,7 +205,7 @@
                                 <td>${requestScope.roomByID.contract.customers.size()}</td>
                                 <td>
                                     <a href="room?rid=${requestScope.roomByID.rid}" class="room_detail">Chi tiết</a>
-                                    <a href="#" class="room_delete" onclick="">Xóa</a>
+                                    <a href="#" class="room_delete" onclick="return deleteRoom(${requestScope.roomByID.rid});">Xóa</a>
                                 </td>
                             </tr>
                         </table>
@@ -238,7 +238,7 @@
                                 <td><%=(roomByStatus.get(i).getContract().getCustomers().size())%></td>
                                 <td>
                                     <a href="room?rid=<%=(roomByStatus.get(i).getRid())%>" class="room_detail">Chi tiết</a>
-                                    <a href="#" class="room_delete" onclick="">Xóa</a>
+                                    <a href="#" class="room_delete" onclick="return deleteRoom(<%=(roomByStatus.get(i).getRid())%>);">Xóa</a>
                                 </td>
                             </tr>  
                             <%}%>
@@ -257,6 +257,9 @@
                                                     'cả những thông tin về hợp đồng và khách hàng\nChắc chắn xóa?');
                                             if (result) {
                                                 window.location.href = "room/delete?rid=" + id;
+                                                return true;
+                                            } else {
+                                                return false;
                                             }
                                         }
                                         function submitForm(id) {
@@ -295,7 +298,6 @@
 
                                         function check() {
                                             var roomId = document.getElementById('roomId').value.trim();
-                                            var table = document.getElementById('myTable');
                                             var warning = document.getElementById('warning');
                                             const regex = "^([0-9]{1,4})$";
                                             var result = new RegExp(regex, 'g').test(roomId);

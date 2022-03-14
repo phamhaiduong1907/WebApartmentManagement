@@ -12,6 +12,28 @@
     text-transform: capitalize;
 }
 
+.room_heading{
+    position: relative;
+}
+
+.room_heading i{
+    display: block;
+    position: absolute;
+    left: 42px;
+    top: 30%;
+    font-size: 35px;
+    cursor: pointer;
+}
+
+.room_heading a{
+    text-decoration: none;
+    color: white;
+}
+
+.room_heading a:hover i{
+    font-size: 40px;
+}
+
 .room_content{
     padding: 40px;
 }

@@ -61,7 +61,8 @@
         </header>
         <div id="main">
             <div class="room_heading">
-                <h2>thông tin phòng thuê</h2>
+                <a href="detail"><i class="fa fa-arrow-left"></i></a>
+                <h2></i>thông tin phòng thuê</h2>
             </div>
             <div class="room_content">
                 <div class="room_info">

@@ -161,11 +161,11 @@ public class RoomDBContext extends DBContext {
         if(status){
             sql = " select r.rid, r.[type], rp.price, rp.deposit from Room r \n"
                 + "inner join Room_Price rp on r.[type] = rp.[type] where\n"
-                + "r.rid in (select rid from [Contract]) order by r.[type] ";
+                + "r.rid in (select rid from Customer group by rid) order by r.[type], r.rid ";
         } else {
             sql = " select r.rid, r.[type], rp.price, rp.deposit from Room r \n"
                 + "inner join Room_Price rp on r.[type] = rp.[type] where\n"
-                + "r.rid not in (select rid from [Contract]) order by r.[type] ";
+                + "r.rid not in (select rid from Customer group by rid) order by r.[type], r.rid ";
         }
         PreparedStatement stm;
         PreparedStatement stm_select_contract;
