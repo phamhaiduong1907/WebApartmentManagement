@@ -28,11 +28,11 @@
                         <div class="personal_info name">
                             <label for="name">Họ và tên: </label>
                             <input type="text" id="name" name="name" value="${requestScope.customer.name}" 
-                                   placeholder="Nguyễn Văn A ...">
+                                   placeholder="Nguyễn Văn A ..." required>
                         </div>
                         <div class="personal_info birthday">
                             <label for="birthday">Ngày tháng năm sinh: </label>
-                            <input type="date" id="birthday" name="dob" value="${requestScope.customer.dob}">
+                            <input type="date" id="birthday" name="dob" value="${requestScope.customer.dob}" required>
                         </div>
                         <div class="gender">
                             <label for="gender">Giới tính: </label>
@@ -46,17 +46,17 @@
                                 ): </label>
                             <input type="hidden" name="default_id" value="${requestScope.customer.id}"/>
                             <input type="text" name="id" id="identification" value="${requestScope.customer.id}"
-                                   placeholder="VD: 034202000167">
+                                   placeholder="VD: 034202000167" required>
                         </div>
                         <div class="personal_info phone">
                             <label for="phone">Số điện thoại: </label>
                             <input type="text" id="phone" value="${requestScope.customer.phone}" 
-                                   name="phone" placeholder="0123-456-789">
+                                   name="phone" placeholder="0123-456-789" required>
                         </div>
                         <div class="personal_info address">
                             <label for="address">Địa chỉ thường trú ( Quê quán ) : </label>
                             <input type="text" id="address" placeholder="Số nhà, ngõ, đường ..." name="address"
-                                   value="${requestScope.customer.address}">
+                                   value="${requestScope.customer.address}" required>
                         </div>
                     </div>
                     <div class="room">
@@ -69,7 +69,7 @@
                         </select>
                         <p id="notice">(*)Tạo hợp đồng ở phòng mới trước khi thay đổi phòng thuê</p>
                     </div>
-                    <button type="submit" id="send">xác nhận</button>
+                    <button type="submit" id="send">XÁC NHẬN</button>
                 </form>
             </div>
         </div>

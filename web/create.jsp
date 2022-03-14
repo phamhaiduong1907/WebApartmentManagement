@@ -26,11 +26,11 @@
                     <div class="input_field">
                         <div class="personal_info name">
                             <label for="name">Họ và tên: </label>
-                            <input type="text" id="name" name="name" placeholder="Nguyễn Văn A ..." value="">
+                            <input type="text" id="name" name="name" placeholder="Nguyễn Văn A ..." value="" required>
                         </div>
                         <div class="personal_info birthday">
                             <label for="birthday">Ngày tháng năm sinh: </label>
-                            <input type="date" id="birthday" name="dob" value="">
+                            <input type="date" id="birthday" name="dob" value="" required>
                         </div>
                         <div class="gender">
                             <label for="gender">Giới tính: </label>
@@ -42,17 +42,17 @@
                         <div class="personal_info identification">
                             <label for="identification">Số chứng minh thư ( CCCD nếu có <span style="color: red;">*</span> ): </label>
                             <input type="text" name="id" id="identification" 
-                                   placeholder="VD: 034202000167" value="">
+                                   placeholder="VD: 034202000167" value="" required>
                         </div>
                         <div class="personal_info phone">
                             <label for="phone">Số điện thoại: </label>
                             <input type="text" id="phone" 
-                                   name="phone" placeholder="0123-456-789" value="">
+                                   name="phone" placeholder="0123-456-789" value="" required>
                         </div>
                         <div class="personal_info address">
                             <label for="address">Địa chỉ thường trú ( Quê quán ) : </label>
                             <input type="text" id="address" placeholder="Số nhà, ngõ, đường ..." 
-                                   name="address" value="">
+                                   name="address" value="" required>
                         </div>
                     </div>
                     <p style="text-transform: uppercase; padding: 20px 20px 0; font-weight: bold; font-size: 25px;"><i class="fa fa-info-circle"></i> Thông tin phòng thuê: </p>

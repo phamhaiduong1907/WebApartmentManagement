@@ -104,7 +104,7 @@
                                 <div class="add_input add_warning">
                                     <label for="rid">Mã phòng: </label>
                                     <input type="text" name="rid" id="roomId" placeholder="Nhập số phòng VD: 101, 102, ..."
-                                           onkeyup="check();">
+                                           onkeyup="check();" required>
                                     <p id="warning"></p>
                                 </div>
                                 <div class="add_input">
