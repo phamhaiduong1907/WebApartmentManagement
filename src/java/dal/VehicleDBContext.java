@@ -5,30 +5,134 @@
  */
 package dal;
 
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import model.Customer;
 import model.Vehicle;
 
 /**
  *
  * @author Hai Duong
  */
-public class VehicleDBContext extends DBContext{
-    public ArrayList<Vehicle> getVehicles(){
-        return null;
+public class VehicleDBContext extends DBContext {
+
+    public ArrayList<Vehicle> getVehicles() {
+        ArrayList<Vehicle> vehicles = new ArrayList<>();
+        try {
+            String sql = " select v.vid, v.vtype, v.vnumber, c.*\n"
+                    + "from Vehicle v inner join Customer c\n"
+                    + "on v.id = c.id  ";
+            PreparedStatement stm = connection.prepareStatement(sql);
+            ResultSet rs = stm.executeQuery();
+            while (rs.next()) {
+                Vehicle vehicle = new Vehicle();
+                vehicle.setVid(rs.getInt("vid"));
+                vehicle.setVnumber(rs.getString("vnumber"));
+                vehicle.setVtype(rs.getString("vtype"));
+                Customer customer = new Customer();
+                customer.setId(rs.getString("id"));
+                customer.setName(rs.getString("name"));
+                vehicle.setCustomer(customer);
+                vehicles.add(vehicle);
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(VehicleDBContext.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return vehicles;
     }
-    
+
     // add vehicle
-    public void insertVehicle(){
-        
+    public void insertVehicle(int vid, String id, String vtype, String vnumber) {
+        String sql = " insert into Vehicle values (?,?,?,?)";
+        PreparedStatement stm = null;
+        try {
+            stm = connection.prepareStatement(sql);
+            stm.setInt(1, vid);
+            stm.setString(2, id);
+            stm.setString(3, vtype);
+            stm.setString(4, vnumber);
+            stm.executeUpdate();
+        } catch (SQLException ex) {
+            Logger.getLogger(VehicleDBContext.class.getName()).log(Level.SEVERE, null, ex);
+        } finally {
+            if (stm != null) {
+                try {
+                    stm.close();
+                } catch (SQLException ex) {
+                    Logger.getLogger(VehicleDBContext.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+            if (connection != null) {
+                try {
+                    connection.close();
+                } catch (SQLException ex) {
+                    Logger.getLogger(VehicleDBContext.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+        }
     }
-    
+
     // update vehicle
-    public void updateVehicle(){
-        
+    public void updateVehicle(int vid, String id, String vtype, String vnumber, int defaut_vid) {
+        String sql = " update Vehicle set vid = ?, id = ?, vtype = ?, vnumber = ? where vid = ? ";
+        PreparedStatement stm = null;
+        try {
+            stm = connection.prepareStatement(sql);
+            stm.setInt(1, vid);
+            stm.setString(2, id);
+            stm.setString(3, vtype);
+            stm.setString(4, vnumber);
+            stm.setInt(5, defaut_vid);
+            stm.executeUpdate();
+        } catch (SQLException ex) {
+            Logger.getLogger(VehicleDBContext.class.getName()).log(Level.SEVERE, null, ex);
+        } finally {
+            if (stm != null) {
+                try {
+                    stm.close();
+                } catch (SQLException ex) {
+                    Logger.getLogger(VehicleDBContext.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+            if (connection != null) {
+                try {
+                    connection.close();
+                } catch (SQLException ex) {
+                    Logger.getLogger(VehicleDBContext.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+        }
     }
-    
+
     //delete vehicle
-    public void deleteVehicle(String id){
-        
+    public void deleteVehicle(int id) {
+        String sql = " delete Vehicle where id = ? ";
+        PreparedStatement stm = null;
+        try {
+            stm = connection.prepareStatement(sql);
+            stm.setInt(1, id);
+            stm.executeUpdate();
+        } catch (SQLException ex) {
+            Logger.getLogger(VehicleDBContext.class.getName()).log(Level.SEVERE, null, ex);
+        } finally {
+            if (stm != null) {
+                try {
+                    stm.close();
+                } catch (SQLException ex) {
+                    Logger.getLogger(VehicleDBContext.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+            if (connection != null) {
+                try {
+                    connection.close();
+                } catch (SQLException ex) {
+                    Logger.getLogger(VehicleDBContext.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+        }
     }
 }

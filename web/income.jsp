@@ -17,6 +17,7 @@
         <link href="css/global.css" rel="stylesheet" type="text/css"/>
         <link href="css/navbar.css" rel="stylesheet" type="text/css"/>
         <link href="css/revenue.css" rel="stylesheet" type="text/css"/>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     </head>
     <body>
         <header>
@@ -39,10 +40,19 @@
                                 <a class="nav-link" aria-current="page" href="index">Trang chủ </a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="detail">Chi Tiết</a>
+                                <a class="nav-link" href="detail">Quản lý</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link active" href="revenue">Thu Chi</a>
+                                <a class="nav-link" href="#">Tiền Nhà</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="#">Tiền Điện</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="#">Khoản chi</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="#">Lịch Sử</a>
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link" href="service">Nhà xe</a>

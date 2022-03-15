@@ -7,9 +7,12 @@ package dal;
 
 import java.sql.Date;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import model.Customer;
 
 /**
  *
@@ -110,5 +113,27 @@ public class CustomerDBContext extends DBContext{
                 }
             }
         }
+    }
+    
+    public ArrayList<Customer> getCustomers(){
+        ArrayList<Customer> customers = new ArrayList<>();
+        try {
+            String sql = " SELECT * FROM Customer ";
+            PreparedStatement stm = connection.prepareStatement(sql);
+            ResultSet rs = stm.executeQuery();
+            while(rs.next()){
+                Customer c = new Customer();
+                c.setId(rs.getString("id"));
+                c.setName(rs.getString("name"));
+                c.setDob(rs.getDate("dob"));
+                c.setGender(rs.getBoolean("gender"));
+                c.setAddress(rs.getString("address"));
+                c.setPhone(rs.getString("phone"));
+                customers.add(c);
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(CustomerDBContext.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return customers;
     }
 }

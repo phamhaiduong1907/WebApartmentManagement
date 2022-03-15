@@ -40,10 +40,19 @@
                                 <a class="nav-link" aria-current="page" href="index">Trang Chủ </a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link active" href="detail">Chi Tiết </a>
+                                <a class="nav-link" href="detail">Quản lý</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="revenue">Thu Chi </a>
+                                <a class="nav-link" href="#">Tiền Nhà</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="#">Tiền Điện</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="#">Lịch Sử</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="#">Khoản chi</a>
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link" href="service">Nhà xe</a>

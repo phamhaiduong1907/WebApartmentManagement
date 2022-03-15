@@ -36,10 +36,6 @@
         <servlet-class>controller.room.CreateRoomController</servlet-class>
     </servlet>
     <servlet>
-        <servlet-name>RevenueController</servlet-name>
-        <servlet-class>controller.RevenueController</servlet-class>
-    </servlet>
-    <servlet>
         <servlet-name>ServiceController</servlet-name>
         <servlet-class>controller.ServiceController</servlet-class>
     </servlet>
@@ -86,10 +82,6 @@
     <servlet-mapping>
         <servlet-name>CreateRoomController</servlet-name>
         <url-pattern>/room/create</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
-        <servlet-name>RevenueController</servlet-name>
-        <url-pattern>/revenue</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>ServiceController</servlet-name>
