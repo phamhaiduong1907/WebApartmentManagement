@@ -51,6 +51,18 @@
         <servlet-name>DeleteContractController</servlet-name>
         <servlet-class>controller.contract.DeleteContractController</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>SearchVehicleController</servlet-name>
+        <servlet-class>controller.vehicle.SearchVehicleController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>DeleteVehicleController</servlet-name>
+        <servlet-class>controller.vehicle.DeleteVehicleController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>AddVehicleController</servlet-name>
+        <servlet-class>controller.vehicle.AddVehicleController</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>LoginController</servlet-name>
         <url-pattern>/login</url-pattern>
@@ -98,6 +110,18 @@
     <servlet-mapping>
         <servlet-name>DeleteContractController</servlet-name>
         <url-pattern>/contract/delete</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>SearchVehicleController</servlet-name>
+        <url-pattern>/vehicle/search</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>DeleteVehicleController</servlet-name>
+        <url-pattern>/vehicle/delete</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>AddVehicleController</servlet-name>
+        <url-pattern>/vehicle/add</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

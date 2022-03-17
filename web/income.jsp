@@ -43,13 +43,10 @@
                                 <a class="nav-link" href="detail">Quản lý</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="#">Tiền Nhà</a>
+                                <a class="nav-link" href="#">Khoản Thu</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="#">Tiền Điện</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="#">Khoản chi</a>
+                                <a class="nav-link" href="#">Khoản Chi</a>
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link" href="#">Lịch Sử</a>

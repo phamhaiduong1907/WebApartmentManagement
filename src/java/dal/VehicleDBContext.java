@@ -45,6 +45,37 @@ public class VehicleDBContext extends DBContext {
         return vehicles;
     }
 
+    public ArrayList<Vehicle> getVehiclesByOwner(String name) {
+        ArrayList<Vehicle> vehicles = new ArrayList<>();
+        try {
+            String sql = " select v.vid, v.vtype, v.vnumber, c.*\n"
+                    + "from Vehicle v inner join Customer c\n"
+                    + "on v.id = c.id ";
+            if (!name.equals("")) {
+                sql += "where c.name like ? ";
+            }
+            PreparedStatement stm = connection.prepareStatement(sql);
+            if (!name.equals("")) {
+                stm.setString(1, "%" + name + "%");
+            }
+            ResultSet rs = stm.executeQuery();
+            while (rs.next()) {
+                Vehicle vehicle = new Vehicle();
+                vehicle.setVid(rs.getInt("vid"));
+                vehicle.setVnumber(rs.getString("vnumber"));
+                vehicle.setVtype(rs.getString("vtype"));
+                Customer customer = new Customer();
+                customer.setId(rs.getString("id"));
+                customer.setName(rs.getString("name"));
+                vehicle.setCustomer(customer);
+                vehicles.add(vehicle);
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(VehicleDBContext.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return vehicles;
+    }
+
     // add vehicle
     public void insertVehicle(int vid, String id, String vtype, String vnumber) {
         String sql = " insert into Vehicle values (?,?,?,?)";
@@ -110,7 +141,7 @@ public class VehicleDBContext extends DBContext {
 
     //delete vehicle
     public void deleteVehicle(int id) {
-        String sql = " delete Vehicle where id = ? ";
+        String sql = " delete Vehicle where vid = ? ";
         PreparedStatement stm = null;
         try {
             stm = connection.prepareStatement(sql);
