@@ -5,6 +5,7 @@
  */
 package controller;
 
+import dal.RoomDBContext;
 import dal.VehicleDBContext;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -13,6 +14,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import model.Room;
 import model.Vehicle;
 
 /**
@@ -33,8 +35,9 @@ public class ServiceController extends BaseAuthenticationController {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         VehicleDBContext db = new VehicleDBContext();
+        RoomDBContext dbRoom = new RoomDBContext();
+        ArrayList<Room> rooms = dbRoom.getRooms();
         ArrayList<Vehicle> vehicles = db.getVehicles();
-//        response.getWriter().println(vehicles.size());
         int bike, motorbike, electricbike;
         bike = motorbike = electricbike = 0;
         for (Vehicle vehicle : vehicles) {
@@ -45,13 +48,11 @@ public class ServiceController extends BaseAuthenticationController {
             if(vehicle.getVtype().trim().equalsIgnoreCase("xe điện"))
                 electricbike++;
         }
-//        response.getWriter().println("Xe đạp: "+bike);
-//        response.getWriter().println("Xe máy: "+motorbike);
-//        response.getWriter().println("Xe điện: "+electricbike);
         request.setAttribute("bike", bike);
         request.setAttribute("motorbike", motorbike);
         request.setAttribute("electricbike", electricbike);
         request.setAttribute("vehicles", vehicles);
+        request.setAttribute("rooms", rooms);
         request.getRequestDispatcher("service.jsp").forward(request, response);
     }
     /**

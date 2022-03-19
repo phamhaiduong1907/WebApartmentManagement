@@ -119,9 +119,9 @@
                                 <td><label for="vtype">Loại xe</label></td>
                                 <td>
                                     <select name="vtype" id="vtype">
-                                        <option value="bike">Xe đạp</option>
-                                        <option value="motorbike">Xe máy</option>
-                                        <option value="electricbike">Xe điện</option>
+                                        <option value="Xe đạp">Xe đạp</option>
+                                        <option value="Xe máy">Xe máy</option>
+                                        <option value="Xe điện">Xe điện</option>
                                     </select>
                                 </td>
                             </tr>
@@ -130,38 +130,41 @@
                                 <td><input type="text" name="vnumber" id="vnumber" placeholder="Biển số" autocomplete="off"></td>
                             </tr>
                         </table>
-                        <button type="submit" onclick="return checkSubmit()">Xác nhận</button>
+                        <button type="submit" onclick="return checkSubmit('Xác nhận tạo phương tiện?')">Xác nhận</button>
                     </div>
                 </form>
+
                 <c:if test="${requestScope.vehicles.size() > 0}">
-                    <table class="vehicle_list">
-                        <thead>
-                            <tr>
-                                <td>Số vé</td>
-                                <td>Chủ sở hữu</td>
-                                <td>Chứng minh thư(CCCD)</td>
-                                <td>Loại xe</td>
-                                <td>Biển số</td>
-                                <td></td>
-                            </tr>
-                        </thead>
-                        <tbody id="vehicleList">
-                            <% for (int i = 0; i < vehicles.size(); i++) {%>
-                            <tr>
-                                <td><%=(vehicles.get(i).getVid())%></td>
-                                <td><%=(vehicles.get(i).getCustomer().getName())%></td>
-                                <td><%=(vehicles.get(i).getCustomer().getId())%></td>
-                                <td><%=(vehicles.get(i).getVtype())%></td>
-                                <td><%=(vehicles.get(i).getVnumber() != null ? vehicles.get(i).getVnumber() : "-")%></td>
-                                <td>
-                                    <a href="#" class="update">Chỉnh sửa</a>
-                                    <a href="#" class="delete" 
-                                       onclick="confirmDelete('<%=(vehicles.get(i).getVid())%>')">Xóa</a>
-                                </td>
-                            </tr>        
-                            <%}%>
-                        </tbody>
-                    </table>
+                    <div id="contentField">
+                        <table class="vehicle_list">
+                            <thead>
+                                <tr>
+                                    <td>Số vé</td>
+                                    <td>Chủ sở hữu</td>
+                                    <td>Chứng minh thư(CCCD)</td>
+                                    <td>Loại xe</td>
+                                    <td>Biển số</td>
+                                    <td></td>
+                                </tr>
+                            </thead>
+                            <tbody id="vehicleList">
+                                <% for (int i = 0; i < vehicles.size(); i++) {%>
+                                <tr>
+                                    <td><%=(vehicles.get(i).getVid())%></td>
+                                    <td><%=(vehicles.get(i).getCustomer().getName())%></td>
+                                    <td><%=(vehicles.get(i).getCustomer().getId())%></td>
+                                    <td><%=(vehicles.get(i).getVtype())%></td>
+                                    <td><%=(vehicles.get(i).getVnumber() != null ? vehicles.get(i).getVnumber() : "-")%></td>
+                                    <td>
+                                        <a href="#" class="update" onclick="update('<%=(vehicles.get(i).getVid())%>')">Chỉnh sửa</a>
+                                        <a href="#" class="delete" 
+                                           onclick="confirmDelete('<%=(vehicles.get(i).getVid())%>')">Xóa</a>
+                                    </td>
+                                </tr>        
+                                <%}%>
+                            </tbody>
+                        </table>
+                    </div>
                 </c:if>
                 <c:if test="${requestScope.vehicles.size() == 0}">
                     <p style="margin-top: 20px;">Không có phương tiện để hiển thị</p> 
@@ -171,71 +174,153 @@
         <script src="js/jquery-3.6.0.min.js"></script>
         <script src="js/bootstrap.bundle.min.js"></script>
         <script>
-                                           function show() {
-                                               var formAdd = document.getElementById('formAdd');
-                                               if (formAdd.style.display === "none") {
-                                                   formAdd.style.display = "block";
-                                               } else {
-                                                   formAdd.style.display = "none";
-                                               }
-                                           }
-
-                                           function find() {
-                                               var nameToSearch = document.getElementById("nameSearch").value.trim();
-                                               $.ajax({
-                                                   url: "/Assignment/vehicle/search",
-                                                   type: "get",
-                                                   data: {
-                                                       name: nameToSearch
-                                                   },
-                                                   success: function (data) {
-                                                       var row = document.getElementById("vehicleList");
-                                                       row.innerHTML = data;
-                                                   },
-                                                   error: function (xhr) {
-
+                                               function show() {
+                                                   var formAdd = document.getElementById('formAdd');
+                                                   if (formAdd.style.display === "none") {
+                                                       formAdd.style.display = "block";
+                                                   } else {
+                                                       formAdd.style.display = "none";
                                                    }
-                                               });
-                                           }
+                                               }
 
-                                           function confirmDelete(id) {
-                                               var result = confirm('Chắc chắn xóa xe?');
-                                               if (result) {
-                                                   window.location.href = "vehicle/delete?id=" + id;
+                                               function find() {
+                                                   var nameToSearch = document.getElementById("nameSearch").value.trim();
+                                                   $.ajax({
+                                                       url: "/Assignment/vehicle/search",
+                                                       type: "get",
+                                                       data: {
+                                                           name: nameToSearch
+                                                       },
+                                                       success: function (data) {
+                                                           var row = document.getElementById("vehicleList");
+                                                           row.innerHTML = data;
+                                                       }
+                                                   });
                                                }
-                                           }
 
-                                           function checkSubmit() {
-                                               var id = document.getElementById("id").value.trim();
-                                               var vnumber = document.getElementById("vnumber").value.trim();
-                                               var ticketNo = document.getElementById("ticketNo").value.trim();
-                                               var vtype = document.getElementById('vtype').value;
-                                               var warning = "";
-                                               var validated = true;
-                                               if (!new RegExp('^([0-9]{9,12})$', 'g').test(id)) {
-                                                   warning += "CCCD không hợp lệ(gồm 9 hoặc 12 số)\n";
-                                                   validated = false;
+                                               function update(vid) {
+                                                   $.ajax({
+                                                       url: "/Assignment/vehicle/update",
+                                                       type: "GET",
+                                                       data: {
+                                                           vid: vid
+                                                       },
+                                                       success: function (data) {
+                                                           var content = document.getElementById('contentField');
+                                                           content.innerHTML = data;
+                                                       }
+                                                   });
                                                }
-                                               if(!new RegExp('^([0-9A-Z-z ]+)$', 'g').test(vnumber)){
-                                                   warning += "Số hiệu xe không hợp lệ\n";
-                                                   validated = false;
+
+                                               function confirmDelete(id) {
+                                                   var result = confirm('Chắc chắn xóa xe?');
+                                                   if (result) {
+                                                       window.location.href = "vehicle/delete?id=" + id;
+                                                   }
                                                }
-                                               if(!new RegExp('^([0-9]+)$', 'g').test(ticketNo)){
-                                                   warning += "Số vé không hợp lệ\n";
-                                                   validated = false;
-                                               }
-                                               if(!validated){
-                                                   alert(warning);
-                                                   return false;
-                                               } else {
-                                                   var result = confirm("Xác nhận tạo phương tiện: "+vtype);
-                                                   if(result){
-                                                       return true;
-                                                   } else{
+
+                                               var ids = [];
+                                               var ticketNos = [];
+            <c:forEach items="${requestScope.vehicles}" var="v">
+                                               ticketNos.push(${v.vid});
+            </c:forEach>
+            <c:forEach items="${requestScope.rooms}" var="r">
+                <c:forEach items="${r.contract.customers}" var="c">
+                                               ids.push('${c.id}');
+                </c:forEach>
+            </c:forEach>
+
+                                               function checkSubmit(msg) {
+                                                   var id = document.getElementById("id").value.trim();
+                                                   var ticketNo = document.getElementById("ticketNo").value.trim();
+                                                   var warning = "";
+                                                   var validated = true;
+                                                   for (var i = 0; i < ids.length; i++) {
+                                                       validated = false;
+                                                       console.log(ids[i]);
+                                                       if (id === ids[i]) {
+                                                           validated = true;
+                                                           break;
+                                                       }
+                                                   }
+                                                   if (!validated) {
+                                                       warning += "Không tìm thấy chứng minh thư tương ứng\n";
+                                                   }
+
+                                                   for (var i = 0; i < ticketNos.length; i++) {
+                                                       if (ticketNos[i] === parseInt(ticketNo, 10)) {
+                                                           validated = false;
+                                                           warning += "Số vé đã tồn tại\n";
+                                                           break;
+                                                       }
+                                                   }
+
+                                                   if (!new RegExp('^([0-9]{9,12})$', 'g').test(id)) {
+                                                       warning += "CCCD không hợp lệ(gồm 9 hoặc 12 số)\n";
+                                                       validated = false;
+                                                   }
+                                                   if (!new RegExp('^([0-9]+)$', 'g').test(ticketNo)) {
+                                                       warning += "Số vé không hợp lệ\n";
+                                                       validated = false;
+                                                   }
+                                                   if (!validated) {
+                                                       alert(warning);
                                                        return false;
+                                                   } else {
+                                                       var result = confirm(msg);
+                                                       if (result) {
+                                                           return true;
+                                                       } else {
+                                                           return false;
+                                                       }
                                                    }
                                                }
-                                           }
+
+                                               function checkUpdate() {
+                                                   var id = document.getElementById("idUpdate").value.trim();
+                                                   var ticketNo = document.getElementById("ticketNoUpdate").value.trim();
+                                                   var warning = "";
+                                                   var validated = true;
+                                                   for (var i = 0; i < ids.length; i++) {
+                                                       validated = false;
+                                                       console.log(ids[i]);
+                                                       if (id === ids[i]) {
+                                                           validated = true;
+                                                           break;
+                                                       }
+                                                   }
+                                                   if (!validated) {
+                                                       warning += "Không tìm thấy chứng minh thư tương ứng\n";
+                                                   }
+
+                                                   for (var i = 0; i < ticketNos.length; i++) {
+                                                       if (ticketNos[i] === parseInt(ticketNo, 10)) {
+                                                           validated = false;
+                                                           warning += "Số vé đã tồn tại\n";
+                                                           break;
+                                                       }
+                                                   }
+
+                                                   if (!new RegExp('^([0-9]{9,12})$', 'g').test(id)) {
+                                                       warning += "CCCD không hợp lệ(gồm 9 hoặc 12 số)\n";
+                                                       validated = false;
+                                                   }
+                                                   if (!new RegExp('^([0-9]+)$', 'g').test(ticketNo)) {
+                                                       warning += "Số vé không hợp lệ\n";
+                                                       validated = false;
+                                                   }
+                                                   if (!validated) {
+                                                       alert(warning);
+                                                       return false;
+                                                   } else {
+                                                       var result = confirm(msg);
+                                                       if (result) {
+                                                           return true;
+                                                       } else {
+                                                           return false;
+                                                       }
+                                                   }
+                                               }
         </script>
     </body>
 </html>

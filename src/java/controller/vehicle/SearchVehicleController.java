@@ -44,7 +44,7 @@ public class SearchVehicleController extends BaseAuthenticationController {
         } else {
             for (int i = 0; i < vehiclesByOwner.size(); i++) {
                 out.println(" <tr>\n"
-                        + "                           <td>" + (i + 1) + "</td>\n"
+                        + "                           <td>" + vehiclesByOwner.get(i).getVid() + "</td>\n"
                         + "                           <td>" + vehiclesByOwner.get(i).getCustomer().getName() + "</td>\n"
                         + "                           <td>" + vehiclesByOwner.get(i).getCustomer().getId() + "</td>\n"
                         + "                           <td>" + vehiclesByOwner.get(i).getVtype() + "</td>\n"
@@ -52,7 +52,8 @@ public class SearchVehicleController extends BaseAuthenticationController {
                         : "-") + "</td>\n"
                         + "                           <td>\n"
                         + "                               <a href=\"#\" class=\"update\">Chỉnh sửa</a>\n"
-                        + "                               <a href=\"#\" class=\"delete\">Xóa</a>\n"
+                        + "                               <a href=\"\" class=\"delete\""
+                                + " onclick=\"confirmDelete('"+vehiclesByOwner.get(i).getVid()+"')\">Xóa</a>\n"
                         + "                           </td>\n"
                         + "                          </tr> ");
             }

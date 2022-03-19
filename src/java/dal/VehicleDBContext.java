@@ -76,6 +76,30 @@ public class VehicleDBContext extends DBContext {
         return vehicles;
     }
 
+    public Vehicle getVehicleByVid(int vid) {
+        try {
+            String sql = " select v.*, c.name from Vehicle v inner join \n"
+                    + "Customer c on v.id = c.id where v.vid = ? ";
+            PreparedStatement stm = connection.prepareStatement(sql);
+            stm.setInt(1, vid);
+            ResultSet rs = stm.executeQuery();
+            if (rs.next()) {
+                Vehicle vehicle = new Vehicle();
+                vehicle.setVid(rs.getInt("vid"));
+                vehicle.setVnumber(rs.getString("vnumber"));
+                vehicle.setVtype(rs.getString("vtype"));
+                Customer customer = new Customer();
+                customer.setId(rs.getString("id"));
+                customer.setName(rs.getString("name"));
+                vehicle.setCustomer(customer);
+                return vehicle;
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(VehicleDBContext.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return null;
+    }
+
     // add vehicle
     public void insertVehicle(int vid, String id, String vtype, String vnumber) {
         String sql = " insert into Vehicle values (?,?,?,?)";
@@ -85,7 +109,11 @@ public class VehicleDBContext extends DBContext {
             stm.setInt(1, vid);
             stm.setString(2, id);
             stm.setString(3, vtype);
-            stm.setString(4, vnumber);
+            if (vnumber.length() == 0 || vnumber == null) {
+                stm.setString(4, null);
+            } else {
+                stm.setString(4, vnumber);
+            }
             stm.executeUpdate();
         } catch (SQLException ex) {
             Logger.getLogger(VehicleDBContext.class.getName()).log(Level.SEVERE, null, ex);
@@ -108,7 +136,7 @@ public class VehicleDBContext extends DBContext {
     }
 
     // update vehicle
-    public void updateVehicle(int vid, String id, String vtype, String vnumber, int defaut_vid) {
+    public void updateVehicle(int vid, String id, String vtype, String vnumber, int default_vid) {
         String sql = " update Vehicle set vid = ?, id = ?, vtype = ?, vnumber = ? where vid = ? ";
         PreparedStatement stm = null;
         try {
@@ -117,7 +145,7 @@ public class VehicleDBContext extends DBContext {
             stm.setString(2, id);
             stm.setString(3, vtype);
             stm.setString(4, vnumber);
-            stm.setInt(5, defaut_vid);
+            stm.setInt(5, default_vid);
             stm.executeUpdate();
         } catch (SQLException ex) {
             Logger.getLogger(VehicleDBContext.class.getName()).log(Level.SEVERE, null, ex);
