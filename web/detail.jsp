@@ -46,16 +46,16 @@
                                 <a class="nav-link" aria-current="page" href="index">Trang Chủ </a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="detail">Quản lý</a>
+                                <a class="nav-link active" href="detail">Quản lý</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="#">Khoản Thu</a>
+                                <a class="nav-link" href="income">Khoản Thu</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="#">Khoản Chi</a>
+                                <a class="nav-link" href="spend">Khoản Chi</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="#">Lịch Sử</a>
+                                <a class="nav-link" href="history">Lịch Sử</a>
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link" href="service">Nhà xe</a>
