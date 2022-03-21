@@ -69,12 +69,28 @@ public class HistoryDBContext extends DBContext {
     }
 
     public ArrayList<History> getHistoriesInterval(Date from, Date to) {
+        ArrayList<History> histories = new ArrayList<>();
         try {
             String sql = " select * from History where receiveddate >= ? \n"
                     + "and receiveddate <= ? ";
             PreparedStatement stm = connection.prepareStatement(sql);
+            stm.setDate(1, from);
+            stm.setDate(2, to);
+            ResultSet rs = stm.executeQuery();
+            while (rs.next()) {
+                History history = new History();
+                history.setId(rs.getInt("id"));
+                history.setName(rs.getString("name"));
+                history.setReceiveddate(rs.getDate("receiveddate"));
+                history.setAmount(rs.getInt("amount"));
+                Room room = new Room();
+                room.setRid(rs.getInt("rid"));
+                history.setRoom(room);
+                histories.add(history);
+            }
         } catch (SQLException ex) {
             Logger.getLogger(HistoryDBContext.class.getName()).log(Level.SEVERE, null, ex);
         }
+        return histories;
     }
 }

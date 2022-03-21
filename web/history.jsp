@@ -21,7 +21,9 @@
         <link href="css/navbar.css" rel="stylesheet" type="text/css"/>
         <link href="css/spend.css" rel="stylesheet" type="text/css"/>
         <%
-            ArrayList<History> histories = (ArrayList<History>)request.getAttribute("histories");
+            ArrayList<History> histories = (ArrayList<History>) request.getAttribute("histories");
+            String from = (String) request.getParameter("from");
+            String to = (String) request.getParameter("to");
         %>
     </head>
     <body>
@@ -79,45 +81,51 @@
                         <div class="filter_field">
                             <div class="filter_item">
                                 <label for="from">Từ ngày:</label>
-                                <input type="date" name="from" id="from">
+                                <input type="date" name="from" id="from" value="<%=(from)%>">
                             </div>
                             <div class="filter_item">
                                 <label for="to">Đến ngày:</label>
-                                <input type="date" name="to" id="to">
+                                <input type="date" name="to" id="to" value="<%=(to)%>">
                             </div>
                         </div>
                         <button type="submit">Tìm kiếm</button>
                     </form>
                 </div>
                 <c:if test="${requestScope.histories.size() > 0}">
-                <div class="history_list">
-                    <table>
-                        <thead>
-                            <tr>
-                                <td>STT</td>
-                                <td>Phòng</td>
-                                <td>Tên khoản thu</td>
-                                <td>Số tiền</td>
-                                <td>Ngày nhận</td>
-                                <td></td>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <%for(int i = 0; i < histories.size(); i++){%>
-                            <tr>
-                                <td><%=(i+1)%></td>
-                                <td><%=(histories.get(i).getRoom().getRid())%></td>
-                                <td><%=(histories.get(i).getName())%></td>
-                                <td><%=(histories.get(i).getAmount())%></td>
-                                <td><%=(histories.get(i).getReceiveddate())%></td>
-                                <td>
-                                    <a href="history/delete?id=<%=(histories.get(i).getId())%>">Xóa</a>
-                                </td>
-                            </tr>
-                            <%}%>
-                        </tbody>
-                    </table>
-                </div>
+                    <div class="history_list">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <td>STT</td>
+                                    <td>Phòng</td>
+                                    <td>Tên khoản thu</td>
+                                    <td>Số tiền</td>
+                                    <td>Ngày nhận</td>
+                                    <td></td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <%  int sum = 0;
+                                    for (int i = 0; i < histories.size(); i++) {
+                                        sum += histories.get(i).getAmount();%>
+                                <tr>
+                                    <td><%=(i + 1)%></td>
+                                    <td><%=(histories.get(i).getRoom().getRid())%></td>
+                                    <td><%=(histories.get(i).getName())%></td>
+                                    <td><%=(histories.get(i).getAmount())%></td>
+                                    <td><%=(histories.get(i).getReceiveddate())%></td>
+                                    <td>
+                                        <a href="history/delete?id=<%=(histories.get(i).getId())%>">Xóa</a>
+                                    </td>
+                                </tr>
+                                <%}%>
+                                <tr>
+                                    <td colspan="3">Tổng cộng:</td>
+                                    <td><%=(sum)%></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
                 </c:if>
                 <c:if test="${requestScope.histories.size() == 0}">
                     <p>Không có khoản thu nào được thanh toán</p>

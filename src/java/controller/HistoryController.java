@@ -8,6 +8,7 @@ package controller;
 import dal.HistoryDBContext;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.sql.Date;
 import java.util.ArrayList;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -31,6 +32,22 @@ public class HistoryController extends BaseAuthenticationController {
 
     @Override
     protected void processPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        
+        String from = request.getParameter("from");
+        String to = request.getParameter("to");
+        ArrayList<History> histories = null;
+        HistoryDBContext db = new HistoryDBContext();
+        if (from.length() != 0 && to.length() != 0) {
+            Date fromDate = Date.valueOf(from);
+            Date toDate = Date.valueOf(to);
+            histories = db.getHistoriesInterval(fromDate, toDate);
+        } else {
+            from = "";
+            to = "";
+            histories = db.getHistories();
+        }
+        request.setAttribute("histories", histories);
+        request.setAttribute("from", from);
+        request.setAttribute("to", to);
+        request.getRequestDispatcher("history.jsp").forward(request, response);
     }
 }

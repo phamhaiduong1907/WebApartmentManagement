@@ -22,6 +22,8 @@
         <link href="css/spend.css" rel="stylesheet" type="text/css"/>
         <%
             ArrayList<Spend> spends = (ArrayList<Spend>) request.getAttribute("spends");
+            String from = (String) request.getParameter("from");
+            String to = (String) request.getParameter("to");
         %>
     </head>
     <body>
@@ -75,15 +77,15 @@
             </div>
             <div class="main_content">
                 <div class="filter_area">
-                    <form action="" id="filterField">
+                    <form action="spend" method="POST" id="filterField">
                         <div class="filter_field">
                             <div class="filter_item">
                                 <label for="from">Từ ngày:</label>
-                                <input type="date" name="" id="from">
+                                <input type="date" name="from" id="from" value="<%=((from == null)?"":from)%>">
                             </div>
                             <div class="filter_item">
                                 <label for="to">Đến ngày:</label>
-                                <input type="date" name="" id="to">
+                                <input type="date" name="to" id="to" <%=((to == null)?"":to)%>>
                             </div>
                         </div>
                         <button type="submit">Tìm kiếm</button>
@@ -93,16 +95,20 @@
                     <div class="btn_create">
                         <button type="button" onclick="show('spendForm', 'block')">Tạo khoản chi</button>
                     </div>
-                    <form action="" id="spendForm" style="display: none;">
+                    <form action="spend/create" method="POST" id="spendForm" style="display: none;">
                         <div class="spend_form">
                             <div class="spend_input">
                                 <div class="spend_item">
                                     <label for="spendName">Tên khoản chi:</label>
-                                    <input type="text" id="spendName" required autocomplete="off">
+                                    <input type="text" id="spendName" name="spendName" required autocomplete="off">
                                 </div>
                                 <div class="spend_item">
                                     <label for="spendAmount">Số tiền:</label>
-                                    <input type="text" id="spendAmount" required autocomplete="off">
+                                    <input type="text" id="spendAmount" name="spendAmount" required autocomplete="off">
+                                </div>
+                                <div class="spend_item">
+                                    <label for="spendAmount">Ghi chú:</label>
+                                    <input type="text" id="spendNote" name="spendNote" required autocomplete="off">
                                 </div>
                             </div>
                             <button type="submit" class="btn_create">Tạo</button>
@@ -123,14 +129,17 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                <%for (int i = 0; i < spends.size(); i++) {%>
+                                <%  int sum = 0;
+                                    for (int i = 0; i < spends.size(); i++) {
+                                        sum += spends.get(i).getAmount();
+                                %>
                                 <tr>
                                     <td><%=(i + 1)%></td>
                                     <td><%=(spends.get(i).getName())%></td>
                                     <td><%=(spends.get(i).getAmount())%></td>
                                     <td><%=(spends.get(i).getAmount())%></td>
                                     <td>
-                                        <form action="#" method="POST">
+                                        <form action="spend/note" method="POST">
                                             <input type="hidden" name="id" value="<%=(spends.get(i).getId())%>"/>
                                             <input type="text" name="note" 
                                                    value="<%=((spends.get(i).getNote() == null) ? "" : spends.get(i).getNote())%>"/>
@@ -138,10 +147,14 @@
                                         </form>
                                     </td>
                                     <td>
-                                        <a href="#">Xóa</a>
+                                        <a href="spend/delete?id=<%=(spends.get(i).getId())%>">Xóa</a>
                                     </td>
                                 </tr>
                                 <%}%>
+                                <tr>
+                                    <td colspan="3">Tổng cộng</td>
+                                    <td><%=(sum)%></td>
+                                </tr>
                             </tbody>
                         </table>
                     </c:if>
