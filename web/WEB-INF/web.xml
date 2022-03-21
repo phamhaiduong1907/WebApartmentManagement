@@ -111,6 +111,18 @@
         <servlet-name>DeleteSpendController</servlet-name>
         <servlet-class>controller.spend.DeleteSpendController</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>AddServiceController</servlet-name>
+        <servlet-class>controller.service.AddServiceController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>DeleteServiceController</servlet-name>
+        <servlet-class>controller.service.DeleteServiceController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ConfirmServiceController</servlet-name>
+        <servlet-class>controller.service.ConfirmServiceController</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>LoginController</servlet-name>
         <url-pattern>/login</url-pattern>
@@ -218,6 +230,18 @@
     <servlet-mapping>
         <servlet-name>DeleteSpendController</servlet-name>
         <url-pattern>/spend/delete</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>AddServiceController</servlet-name>
+        <url-pattern>/service/add</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>DeleteServiceController</servlet-name>
+        <url-pattern>/service/delete</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ConfirmServiceController</servlet-name>
+        <url-pattern>/service/confirm</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

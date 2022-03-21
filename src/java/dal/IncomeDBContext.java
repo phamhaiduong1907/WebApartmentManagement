@@ -81,6 +81,7 @@ public class IncomeDBContext extends DBContext{
                 service.setServiceprice(rs.getInt("serviceprice"));
                 service.setElecno(rs.getInt("elecno"));
                 service.setElecunit(rs.getInt("elecunit"));
+                service.setAmount(service.getElecno()*service.getElecunit()+service.getServiceprice());
                 service.setNote(rs.getString("note"));
                 Room room = new Room();
                 room.setRid(rs.getInt("rid"));
@@ -91,5 +92,44 @@ public class IncomeDBContext extends DBContext{
             Logger.getLogger(IncomeDBContext.class.getName()).log(Level.SEVERE, null, ex);
         }
         return services;
+    }
+    
+    public void addService(int rid, String name, int serviceprice, int elecno, int elecunit, String note){
+        try {
+            String sql = " insert into [Service] values (?,?,?,?,?,?) ";
+            PreparedStatement stm = connection.prepareStatement(sql);
+            stm.setInt(1, rid);
+            stm.setString(2, name);
+            stm.setInt(3, serviceprice);
+            stm.setInt(4, elecno);
+            stm.setInt(5, elecunit);
+            stm.setString(6, note);
+            stm.executeUpdate();
+        } catch (SQLException ex) {
+            Logger.getLogger(IncomeDBContext.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    
+    public void deleteService(int id){
+        try {
+            String sql = " delete Service where id = ? ";
+            PreparedStatement stm = connection.prepareStatement(sql);
+            stm.setInt(1, id);
+            stm.executeUpdate();
+        } catch (SQLException ex) {
+            Logger.getLogger(IncomeDBContext.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    
+    public void noteService(int id, String note){
+        try {
+            String sql = " update Service set note = ? where id = ? ";
+            PreparedStatement stm = connection.prepareStatement(sql);
+            stm.setInt(2, id);
+            stm.setString(1, note);
+            stm.executeUpdate();
+        } catch (SQLException ex) {
+            Logger.getLogger(IncomeDBContext.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 }

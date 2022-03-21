@@ -36,7 +36,7 @@ public class SpendController extends BaseAuthenticationController {
         String to = request.getParameter("to");
         ArrayList<Spend> spends = null;
         SpendDBContext db = new SpendDBContext();
-        if((from != null && to != null)||(from.trim().length() != 0 && to.trim().length() != 0 )){
+        if(from.trim().length() != 0 && to.trim().length() != 0 ){
             Date fromDate = Date.valueOf(from);
             Date toDate = Date.valueOf(to);
             spends = db.getSpendsInterval(fromDate, toDate);

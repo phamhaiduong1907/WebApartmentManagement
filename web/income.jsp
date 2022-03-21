@@ -4,6 +4,8 @@
     Author     : Hai Duong
 --%>
 
+<%@page import="model.Room"%>
+<%@page import="model.Service"%>
 <%@page import="model.Rent"%>
 <%@page import="java.util.ArrayList"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
@@ -23,6 +25,8 @@
         <link rel="stylesheet" href="css/income.css"/>
         <%
             ArrayList<Rent> rents = (ArrayList<Rent>) request.getAttribute("rents");
+            ArrayList<Service> services = (ArrayList<Service>) request.getAttribute("services");
+            ArrayList<Room> rooms = (ArrayList<Room>) request.getAttribute("rooms");
         %>
     </head>
     <body>
@@ -164,7 +168,6 @@
                                 </td>
                             </tr>
                             <%}%>
-
                         </tbody>
                     </table>
                 </c:if>
@@ -190,7 +193,7 @@
 
 
 
-                <form action="" id="serviceForm" style="display: none;">
+                <form action="service/add" method="GET" id="serviceForm" style="display: none;">
                     <div class="serviceForm_input">
                         <div class="default_field">
                             <div class="default_item">
@@ -217,38 +220,19 @@
                                     </tr>
                                 </thead>
                                 <tbody>
+                                    <%for (int i = 0; i < rooms.size(); i++) {%>
                                     <tr>
-                                        <td>1</td>
-                                        <td>101</td>
+                                        <td><%=(i + 1)%></td>
+                                        <td><%=(rooms.get(i).getRid())%></td>
                                         <td>
+                                            <input type="hidden" name="rid" value="<%=(rooms.get(i).getRid())%>"/>
                                             <input type="text" name="consumedElec" class="elecNo" required autocomplete="off">
                                         </td>
                                         <td>
                                             <input type="text" name="toCass" class="toCass" readonly>
                                         </td>
                                     </tr>
-                                    <tr>
-                                        <td>2</td>
-                                        <td>102</td>
-                                        <td>
-                                            <input type="text" name="consumedElec" class="elecNo" required
-                                                   autocomplete="off">
-                                        </td>
-                                        <td>
-                                            <input type="text" name="toCass" class="toCass" readonly>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>3</td>
-                                        <td>103</td>
-                                        <td>
-                                            <input type="text" name="consumedElec" class="elecNo" required
-                                                   autocomplete="off">
-                                        </td>
-                                        <td>
-                                            <input type="text" name="toCass" class="toCass" readonly>
-                                        </td>
-                                    </tr>
+                                    <%}%>
                                 </tbody>
                                 <tr id="calculate">
                                     <td colspan="3">Tổng cộng:</td>
@@ -272,7 +256,7 @@
 
 
 
-                <form action="#" id="formAddService" style="display: none;">
+                <form action="service/add" method="POST" id="formAddService" style="display: none;">
                     <div class="serviceForm_input">
                         <div class="default_field">
                             <div class="default_item">
@@ -281,11 +265,13 @@
                             </div>
                             <div class="default_item">
                                 <label for="servicePrice">Giá dịch vụ:</label>
-                                <input type="text" name="servicePrice" id="addPrice" required autocomplete="off">
+                                <input type="text" name="servicePrice" id="addPrice" 
+                                       required autocomplete="off" pattern="[1-9][0-9{3,}">
                             </div>
                             <div class="default_item">
                                 <label for="servicePrice">Đơn giá điện:</label>
-                                <input type="text" name="unitElectricity" id="addUnit" required autocomplete="off">
+                                <input type="text" name="unitElectricity" id="addUnit" 
+                                       required autocomplete="off" pattern="[1-9][0-9]{3,}">
                             </div>
                         </div>
                         <div class="input_field">
@@ -307,19 +293,19 @@
                                             </select>
                                         </td>
                                         <td>
-                                            <input type="text" id="addConsumed" name="elecno" class="elecNo" required
-                                                   autocomplete="off">
+                                            <input type="text" id="addConsumed" name="elecno" class="elecAddNo" required
+                                                   autocomplete="off" pattern="[0-9]+">
                                         </td>
                                         <td>
-                                            <input type="text" id="addCash" name="cash" class="toCass" readonly>
+                                            <input type="text" id="addCash" name="cash" class="toAddCass" readonly>
                                         </td>
                                     </tr>
                                 </tbody>
                             </table>
                             <div class="button_group">
                                 <button class="confirm" type="reset">Tạo lại</button>
-                                <button class="confirm" type="button" onclick="check();">Tính Tiền</button>
-                                <button class="confirm" type="submit" onclick="checkSubmit()">Xác Nhận</button>
+                                <button class="confirm" type="button" onclick="toCash();">Tính Tiền</button>
+                                <button class="confirm" type="submit">Xác Nhận</button>
                             </div>
                         </div>
                     </div>
@@ -328,80 +314,47 @@
 
 
 
-                <div class="service_content">
-                    <table id="serviceTable">
-                        <thead>
-                            <tr>
-                                <td>STT</td>
-                                <td>Tên phòng</td>
-                                <td>Tiền dịch vụ</td>
-                                <td>Tiền điện</td>
-                                <td>Thành tiền</td>
-                                <td>Xác nhận</td>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td>1</td>
-                                <td>101</td>
-                                <td>130000</td>
-                                <td>60000</td>
-                                <td>190000</td>
-                                <td>
-                                    <a href="#" class="confirm">
-                                        <i class="fa-solid fa-circle-check"></i>
-                                        Xác nhận thu tiền
-                                    </a>
-                                    <a href="#" class="delete"><i class="fa-solid fa-trash-can"></i> Xóa</a>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>1</td>
-                                <td>101</td>
-                                <td>130000</td>
-                                <td>60000</td>
-                                <td>190000</td>
-                                <td>
-                                    <a href="#" class="confirm">
-                                        <i class="fa-solid fa-circle-check"></i>
-                                        Xác nhận thu tiền
-                                    </a>
-                                    <a href="#" class="delete"><i class="fa-solid fa-trash-can"></i> Xóa</a>
-                                </td>
-
-                            </tr>
-                            <tr>
-                                <td>1</td>
-                                <td>101</td>
-                                <td>130000</td>
-                                <td>60000</td>
-                                <td>190000</td>
-                                <td>
-                                    <a href="#" class="confirm">
-                                        <i class="fa-solid fa-circle-check"></i>
-                                        Xác nhận thu tiền
-                                    </a>
-                                    <a href="#" class="delete"><i class="fa-solid fa-trash-can"></i> Xóa</a>
-                                </td>
-
-                            </tr>
-                            <tr>
-                                <td>1</td>
-                                <td>101</td>
-                                <td>130000</td>
-                                <td>60000</td>
-                                <td>190000</td>
-                                <td>
-                                    <a href="#" class="confirm">
-                                        <i class="fa-solid fa-circle-check"></i>
-                                        Xác nhận thu tiền
-                                    </a>
-                                    <a href="#" class="delete"><i class="fa-solid fa-trash-can"></i> Xóa</a>
-                                </td>
-                            </tr>
-                        </tbody>
-                    </table>
-
+                <div class="service_content" id="serviceContent">
+                    <c:if test="${requestScope.services.size() > 0}">
+                        <table id="serviceTable">
+                            <thead>
+                                <tr>
+                                    <td>STT</td>
+                                    <td>Tên phòng</td>
+                                    <td>Tên khoản thu</td>
+                                    <td>Tiền dịch vụ</td>
+                                    <td>Tiền điện</td>
+                                    <td>Thành tiền</td>
+                                    <td>Xác nhận</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <%for (int i = 0; i < services.size(); i++) {%>
+                                <tr>
+                                    <td><%=(i + 1)%></td>
+                                    <td><%=(services.get(i).getRoom().getRid())%></td>
+                                    <td><%=(services.get(i).getName())%></td>
+                                    <td><%=(services.get(i).getServiceprice())%></td>
+                                    <td><%=(services.get(i).getElecno() * services.get(i).getElecunit())%></td>
+                                    <td><%=(services.get(i).getAmount())%></td>
+                                    <td>
+                                        <a href="service/confirm?rid=<%=(services.get(i).getRoom().getRid())%>&name=<%=(services.get(i).getName())%>&amount=<%=(services.get(i).getAmount())%>&id=<%=(services.get(i).getId())%>" 
+                                        class="confirm" style="display: inline-block; padding: 5px; font-size: 15px"> 
+                                            <i class="fa-solid fa-circle-check"></i>
+                                            Xác nhận thu tiền
+                                        </a>
+                                        <a href="service/delete?id=<%=(services.get(i).getId())%>" 
+                                           class="delete" style="display: inline-block; padding: 5px;
+                                           font-size: 15px"><i class="fa-solid fa-trash-can"></i> Xóa</a>
+                                    </td>
+                                </tr>
+                                <%}%>
+                            </tbody>
+                        </table>
+                    </c:if>
+                    <c:if test="${requestScope.services.size() == 0}">
+                        <p>Không có khoản thu nào để hiển thị</p>
+                    </c:if>
                 </div>
             </div>
         </div>
@@ -420,6 +373,8 @@
                                         var toCass = document.getElementsByClassName("toCass");
                                         var total = 0;
                                         for (let i = 0; i < consumedElec.length; i++) {
+                                            console.log(consumedElec[i].value);
+                                            console.log(regex.test(consumedElec[i].value));
                                             if (!regex.test(consumedElec[i].value)) {
                                                 alert('Số điện nhập vào phải là số không bắt đầu bằng 0. VD: Hãy nhập 1 , 10, 100, ...');
                                                 return false;
@@ -490,6 +445,15 @@
                                             return false;
                                         }
                                     }
+
+                                    function toCash() {
+                                        var consume = document.getElementById('addConsumed').value.trim();
+                                        var cash = document.getElementById('addCash');
+                                        var addUnit = parseInt(document.getElementById('addUnit').value.trim(), 10);
+                                        cash.value = parseInt(consume, 10) * addUnit;
+                                    }
+
+
         </script>
     </body>
 </html>
