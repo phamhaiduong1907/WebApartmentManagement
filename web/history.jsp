@@ -30,7 +30,7 @@
         <header>
             <nav class="headerNav navbar navbar-expand-lg container">
                 <div class="container-fluid">
-                    <a class="navLogo navbar-brand text-center" href="index.html">
+                    <a class="navLogo navbar-brand text-center" href="index">
                         <p class="fw-bold mb-0"><i class="fa fa-book"></i> QUẢN LÝ</p>
                         <p class="fw-bold mb-0">NHÀ TRỌ</p>
                     </a>
