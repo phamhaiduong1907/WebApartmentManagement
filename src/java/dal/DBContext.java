@@ -20,7 +20,7 @@ public class DBContext {
     
     public DBContext(){
         try {
-            String user = "se1611";
+            String user = "duongph";
             String password = "fpt1234567";
             String url = "jdbc:sqlserver://LAPTOP-GOCMI1F5\\SQLEXPRESS:1433;databaseName=Assignment";
             Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
