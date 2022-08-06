@@ -1,0 +1,226 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : Mar 7, 2022, 9:46:38 PM
+    Author     : Hai Duong
+*/
+
+#main{
+    width: 85%;
+    margin: 0 auto;
+    background-color: #fff;
+    margin-top: 30px;
+}
+
+.main_heading h1{
+    text-align: center;
+    font-weight: bold;
+    color: #fff;
+    background-color: #6495ed;
+    padding: 10px;
+    margin: 0;
+}
+
+.main_content{
+    padding: 30px;
+}
+
+.report{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 90%;
+    margin: 0 auto;
+    border-bottom: 1px double #ddd;
+    margin-bottom: 20px;
+}
+
+.report p{
+    font-size: 20px;
+    font-weight: 600;
+}
+
+.search_box{
+    display: flex;
+    align-items: center;
+    border: 2px solid black;
+    width: 40%;
+    margin: 0 auto;
+    border-radius: 40px;
+    padding: 4px;
+}
+
+.search_box .input{
+    flex: 1;
+    border-radius: 40px;
+}
+
+.search_box .search_button{
+    padding: 10px;
+    background-color: #6495ed;
+    color: #fff;
+    width: 9.5%;
+    border-radius: 50%;
+    text-align: center;
+    cursor: auto;
+    border: none;
+}
+
+.search_box input{
+    border: none;
+    outline: none;
+    background-color: #fff;
+    border-radius: 40px;
+    color: #8b7d77;
+    padding-left: 10px;
+    width: 100%;
+}
+
+.add, .update, .delete, .add_input button{
+    display: inline-block;
+    text-decoration: none;
+    padding: 10px;
+    color: #fff;
+    font-size: 18px;
+    border-radius: 10px;
+    font-weight: 500;
+    margin-top: 20px;
+}
+
+a:hover{
+    color: #fff;
+}
+
+.add, .add_input button{
+    background-color: greenyellow;
+    border: none;
+}
+
+.add:hover, .add_input button:hover{
+    background-color: #94d434;
+    color: #fff;
+}
+
+.add_heading{
+    background-color: #ccc;
+    margin-top: 20px;
+    height: 40px;
+}
+
+.add_input{
+    border: 1px solid #ccc;
+    padding: 20px;
+}
+
+#addTable{
+    margin: 0;
+    display: table;
+    width: 90%;
+    margin: 0 auto;
+}
+
+#addTable tr td:first-child{
+    width: 30%;
+    text-align: left;
+}
+
+#addTable td input, #addTable td select{
+    display: block;
+    width: 100%;
+}
+
+#addTable label{
+    cursor: pointer;
+}
+
+#addTable input, #addTable select{
+    padding: 5px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    outline: none;
+    transition: all 0.5s;
+}
+
+#addTable input:focus{
+    box-shadow: 0 0 2px 1px skyblue inset;
+}
+
+#addTable, #addTable tr, #addTable td{
+    border: none;
+}
+
+.add_input button{
+    margin-left: auto;
+    display: block;
+    margin-right: 65px;
+}
+
+.vehicle_list{
+    display: table;
+    width: 100%;
+    margin-top: 15px;
+}
+
+table{
+    margin-top: 15px;
+}
+
+table, tr, td{
+    border: 1px solid #ccc;
+    text-align: center;
+    font-size: 20px;
+    padding: 10px;
+}
+
+thead{
+    background-color: #6495ed;
+    color: #fff;
+    font-weight: bold;
+}
+
+.update{
+    background-color: #6495ed;
+    margin-right: 8px;
+    margin-top: 0;
+}
+
+.update:hover{
+    background-color: #5174b4;
+}
+
+.delete{
+    background-color: #ff0000;
+    margin-top: 0;
+}
+
+.delete:hover{
+    background-color: #cc0808;
+}
+
+.add_button{
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+}
+
+.add_button a{
+    display: block;
+    margin-right: 20px;
+    text-decoration: none;
+    color: white;
+    background-color: #ccc;
+    padding: 11px;
+    border-radius: 10px;
+}
+
+.add_button a{
+    background-color: #bbb;
+    color: #fff;
+}
+
+.add_button button{
+    margin: 0;
+}

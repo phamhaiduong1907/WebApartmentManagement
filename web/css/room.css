@@ -1,0 +1,262 @@
+#main{
+    width: 90%;
+    background-color: #fff;
+    margin: 30px auto;
+}
+
+.room_heading h2{
+    background: #6495ed;
+    text-align: center;
+    font-size: 35px;
+    padding: 25px;
+    text-transform: capitalize;
+}
+
+.room_heading{
+    position: relative;
+}
+
+.room_heading i{
+    display: block;
+    position: absolute;
+    left: 42px;
+    top: 30%;
+    font-size: 35px;
+    cursor: pointer;
+}
+
+.room_heading a{
+    text-decoration: none;
+    color: white;
+}
+
+.room_heading a:hover i{
+    font-size: 40px;
+}
+
+.room_content{
+    padding: 40px;
+}
+
+.room_info, .room_member{
+    position: relative;
+}
+
+.labelling{
+    display: inline-block;
+    padding: 5px;
+    color: white;
+    border-radius: 5px;
+    position: absolute;
+    left: 0;
+    top: -33px;
+}
+
+.room_info .labelling{
+    background-color: #6495ed;
+}
+
+.heading{
+    text-transform: uppercase;
+    font-size: 20px;
+    padding: 15px 25px;
+
+}
+
+.info_heading{
+    background-color: greenyellow;
+    color: #fff;
+    border: 1px solid greenyellow;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-radius: 5px 5px 0 0;
+}
+
+
+
+.info_heading i:hover{
+    font-size: 30px;
+}
+
+.info_heading i{
+    cursor: pointer;
+    font-size: 25px;
+}
+
+/* #infoContent:hover{
+    transform: scaleY(0);
+    transform-origin: top;
+} */
+
+.info_content{
+    border: 1px solid #dbdbdb;
+    border-top: greenyellow;
+    padding: 20px 25px;
+}
+
+.info_input, .contract_detail{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    color: grey;    
+}
+
+.info_item{
+    width: 30%;
+}
+
+.info_item input, .info_item select, .contract_item input{
+    padding: 10px;
+    outline: none;
+    border-radius: 5px;
+    border: 1px solid #dbdbdb;
+    width: 100%;
+    font-family: 'Roboto', sans-serif;
+    font-size: 16px;
+    color: grey;
+    font-weight: 500;
+    transition: all .25s;
+}
+
+.info_item p, .contract_item p{
+    margin-bottom: 10px;
+    font-size: 18px;
+    font-weight: bold;
+}
+
+.info_item input:focus, .contract_item input:focus, .info_item select:focus, .contract_item select:focus{
+    box-shadow: 0 0 2px 2px lightskyblue inset;
+}
+
+.contract_input{
+    margin-top: 20px;
+}
+
+.contract_input .contract_heading{
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    font-style: italic;
+    text-decoration: underline;
+    margin-bottom: 10px;
+}
+
+.contract_item{
+    width: 30%;
+}
+
+.modify{
+    margin-top: 30px;
+    text-align: center;
+}
+
+.modify input, .modify a{
+    font-family: 'Roboto', sans-serif;
+    font-weight: bold;
+    text-decoration: none;
+    color: #fff;
+    display: inline-block;
+    padding: 10px;
+    font-size: 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    margin: 0 auto;
+    transition: all .1s ease;
+}
+
+.modify input{
+    background-color: greenyellow;
+    border: 1px solid greenyellow;
+}
+
+.modify a{
+    background-color: red;
+    border: 1px solid red;
+    margin-left: 10px;
+}
+
+.modify input:hover{
+    background-color: #88d811;
+}
+
+.modify a:hover{
+    background-color: rgba(255,0,0,0.6); 
+}
+
+.room_member{
+    margin-top: 50px;
+}
+
+.room_member .labelling{
+    background-color: #444;
+}
+
+.member_heading{
+    background-color: #eee;
+    color: #000;
+    border: 1px solid #ddd;
+    border-bottom: none;
+}
+
+.member_content{
+    border: 1px solid #ddd;
+    padding: 15px;
+    
+}
+
+.member_content table{
+    display: table;
+    width: 100%;
+    text-align: center;
+    border-collapse: collapse;
+}
+
+table, tr, td{
+    border: 1px solid #ddd;
+    padding: 10px;
+}
+
+table tr:first-child{
+    font-weight: bold;
+}
+
+td a{
+    text-decoration: none;
+    display: inline-block;
+    padding: 10px;
+    background-color: #666;
+    color: #fff;
+    border-radius: 5px;
+    border: 1px solid #666;
+    transition: all .25s;
+}
+
+td a:hover{
+    background-color: #999;
+    color: #fff;
+}
+
+.member_delete{
+    background-color: red;
+    border: 1px solid red;
+}
+
+.member_delete:hover{
+    background-color: rgba(255, 0, 0,0.6);
+    color: white;
+}
+
+.member_add{
+    display: inline-block;
+    text-decoration: none;
+    margin-top: 15px;
+    padding: 5px;
+    background-color: #88d811;
+    color: #fff;
+    border-radius: 5px;
+}
+
+.member_add:hover{
+    background-color: greenyellow;
+    color: #fff;
+}
